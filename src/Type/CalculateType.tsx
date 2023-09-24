@@ -15,6 +15,9 @@ export interface CalculatedData {
 }
 export interface CalculatedDetail {
   name: string
+  level: number
+  quality: number
+  corrupted: boolean
   qualityType: number
   weight: number
   price: number

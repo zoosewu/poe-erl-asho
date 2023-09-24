@@ -120,7 +120,10 @@ const Zoosewu: React.FC<ZoosewuProps> = ({ currency, skillGem, skillQuality, Set
                 if (otherVariant.corrupted) continue;
                 const newCalculateDetail = {
                   name: otherVariant.name,
-                  qualityType: qualityDetail['qualityType'],
+                  level: otherVariant.level,
+                  quality: otherVariant.quality,
+                  corrupted: otherVariant.corrupted,
+                  qualityType: qualityDetail.qualityType,
                   weight: qualityDetail.weight,
                   price: otherVariant.chaosValue
                 } as CalculatedDetail
@@ -141,6 +144,9 @@ const Zoosewu: React.FC<ZoosewuProps> = ({ currency, skillGem, skillQuality, Set
             if (!otherVariant.corrupted) continue;
             const newCalculateDetail = {
               name: otherVariant.name,
+              level: otherVariant.level,
+              quality: otherVariant.quality,
+              corrupted: otherVariant.corrupted,
               qualityType: variant.qualityType,
               weight: 1,
               price: otherVariant.chaosValue
