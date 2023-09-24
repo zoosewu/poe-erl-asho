@@ -6,7 +6,7 @@ import CurrencyList from './components/CurrencyInfoList';
 import Footer from './components/footer';
 import './App.scss';
 import Layout from './components/layout';
-import { Routes, Route, BrowserRouter } from 'react-router-dom'
+import { Routes, Route, HashRouter } from 'react-router-dom'
 import NoMatch from './components/NoMatch';
 import { connect } from 'react-redux';
 import { SetSkillGem, SetCurrency, SetCurrencyDetails, SetSkillQuality } from './redux/actions';
@@ -26,8 +26,6 @@ interface AppProps {
 }
 
 const App: React.FC<AppProps> = ({ SetSkillGem, SetCurrency, SetCurrencyDetails }) => {
-
-
   useEffect(() => {
     const FetchAPI = async () => {
       let leagueJson: LeagueInfoRoot
@@ -108,7 +106,7 @@ const App: React.FC<AppProps> = ({ SetSkillGem, SetCurrency, SetCurrencyDetails 
   }, []);
   return (
     <div className="App">
-      <BrowserRouter basename='poe-erl-asho/'>
+      <HashRouter basename='poe-erl-asho/'>
         <Routes>
           <Route path='/' element={<Layout />}>
             <Route path='/home' element={<SkillGemInfoList />} />
@@ -118,7 +116,7 @@ const App: React.FC<AppProps> = ({ SetSkillGem, SetCurrency, SetCurrencyDetails 
             <Route path='*' element={<NoMatch />} />
           </Route>
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 }
