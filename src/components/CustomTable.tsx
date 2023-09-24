@@ -22,14 +22,19 @@ export const CustomTableFactory = <P extends any>() => {
     const sortBy: string = searchParams.get('sortBy') || ''
     const currentPage: number = parseInt(searchParams.get('page') as string) || 1
     useEffect(() => {
+      console.log('data',stateData,data)
       if (!data) return;
       setStateData(data)
     }, [data]);
     useEffect(() => {
+      console.log('sortBy 1',stateData,data)
       if (!stateData) return;
-      if (listedProperty!.has(sortBy))
+      console.log('sortBy 2')
+      if (listedProperty!.has(sortBy)) {
+        console.log('sortBy has')
         stateData.sort(listedProperty!.get(sortBy)?.GetComparer)
-      else if (listedProperty!.has(sortBy.substring(1))) {
+      } else if (listedProperty!.has(sortBy.substring(1))) {
+        console.log('sortBy has r')
         stateData.sort((a, b) => (-1 * (listedProperty!.get(sortBy.substring(1))!.GetComparer(a, b))))
       }
       setStateData(Object.assign([], stateData))

@@ -46,9 +46,9 @@ const CurrencyList: React.FC<CurrencyListProps> = ({ currency, currencyDetails, 
     ]))
   }, [currency, currencyDetails])
   return (
-    <div>
+    <>
       <Table data={currency} listedProperty={listedProperty} />
-    </div >
+    </ >
   );
 };
 const mapStateToProps = (state: { currency: Currency[], currencyDetails: Map<string, CurrencyDetail> }) => ({

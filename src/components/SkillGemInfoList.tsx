@@ -17,6 +17,7 @@ interface SkillGemVariantInfo extends SkillGemVariant {
   base: SkillGem
 }
 const SkillGemInfoList: React.FC<SkillGemInfoListProps> = ({ skillGem }) => {
+  console.log('SkillGemInfoList Table')
   const Table = CustomTableFactory<SkillGemVariantInfo>();
   const [listedProperty, SetListedProperty] = useState<Map<string, ListedProperty<SkillGemVariantInfo>>>()
   const [skillGemVariantInfo, SetSkillGemVariantInfo] = useState<SkillGemVariantInfo[]>()
@@ -86,9 +87,9 @@ const SkillGemInfoList: React.FC<SkillGemInfoListProps> = ({ skillGem }) => {
   }, [skillGem])
 
   return (
-    <div>
+    <>
       <Table data={skillGemVariantInfo} listedProperty={listedProperty} />
-    </div >
+    </ >
   )
 }
 const mapStateToProps = (state: { skillGem: Map<string, SkillGem> }) => ({

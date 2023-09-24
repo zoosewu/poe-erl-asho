@@ -12,35 +12,17 @@ import { SkillGem, SkillGemInfo } from '../Type/SkillGemInfoType';
 import { SkillQuality } from '../Type/SkillQualityType';
 import { SetSkillQuality } from '../redux/actions';
 import { GetSkillQuality } from './SkillQualityGetter';
+import { CalculatedData, CalculatedDetail } from '../Type/CalculateType';
 interface ZoosewuProps {
   currency: Currency[]
   skillGem: Map<string, SkillGem>
   skillQuality: Map<string, SkillQuality>
   SetSkillQuality: typeof SetSkillQuality
 }
-interface CalculatedData {
-  icon: ReactNode
-  name: string
-  baseType: string
-  level: number
-  quality: number
-  GemCost: number
-  LensCost: number
-  LensIncome: number
-  VaalIncome: number
-  earningsYield: number
-  details: CalculatedDetail[]
-}
-interface CalculatedDetail {
-  name: string
-  qualityType: number
-  weight: number
-  price: number
-}
+
 const Zoosewu: React.FC<ZoosewuProps> = ({ currency, skillGem, skillQuality, SetSkillQuality }) => {
   const [stateData, setStateData] = useState<CalculatedData[]>([])
   const Table = CustomTableFactory<CalculatedData>();
-  const [searchParams, setSearchParams] = useSearchParams();
   const [listedProperty, SetListedProperty] = useState<Map<string, ListedProperty<CalculatedData>>>()
   useEffect(() => {
     SetListedProperty(new Map<string, ListedProperty<CalculatedData>>([
@@ -181,9 +163,9 @@ const Zoosewu: React.FC<ZoosewuProps> = ({ currency, skillGem, skillQuality, Set
     fetchData()
   }, [skillGem, SetSkillQuality])
   return (
-    <div>
+    <>
       <Table data={stateData} listedProperty={listedProperty} />
-    </div >
+    </ >
   )
 }
 const mapStateToProps = (state: { currency: Currency[], skillGem: Map<string, SkillGem>, skillQuality: Map<string, SkillQuality> }) => ({
