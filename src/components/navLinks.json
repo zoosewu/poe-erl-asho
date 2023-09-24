@@ -10,5 +10,9 @@
   {
     "label": "寶石品質",
     "href": "qualityInfo"
+  }  ,
+  {
+    "label": "計算",
+    "href": "zoosewu"
   }
 ]
