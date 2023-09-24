@@ -108,12 +108,12 @@ const App: React.FC<AppProps> = ({ SetSkillGem, SetCurrency, SetCurrencyDetails 
   }, []);
   return (
     <div className="App">
-      <BrowserRouter>
+      <BrowserRouter basename='poe-erl-asho/'>
         <Routes>
-          <Route path='./' element={<Layout />}>
-            <Route path='./home' element={<SkillGemInfoList />} />
-            <Route path='./currency' element={<CurrencyList />} />
-            <Route path='./zoosewu' element={<Zoosewu />} />
+          <Route path='/' element={<Layout />}>
+            <Route path='/home' element={<SkillGemInfoList />} />
+            <Route path='/currency' element={<CurrencyList />} />
+            <Route path='/zoosewu' element={<Zoosewu />} />
             <Route index element={<SkillGemInfoList />} />
             <Route path='*' element={<NoMatch />} />
           </Route>

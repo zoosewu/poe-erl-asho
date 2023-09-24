@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const Header: React.FC = () => {
   return (
     <Navbar bg="light" expand="lg">
-      <Navbar.Brand href="/">HoloSchedule</Navbar.Brand>
+      <Navbar.Brand href="/">POE Erl Asho</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
