@@ -40,9 +40,9 @@ const App: React.FC<AppProps> = ({ SetSkillGem, SetCurrency, SetCurrencyDetails 
         skillGemJson = mockDataSkillGem
         currencyJson = mockDataCurrency
       } else {
-        const leaGueData = await fetch('https://www.poewiki.net/w/api.php?action=cargoquery&tables=events&fields=name,ordinal,release_date,release_version,short_name&order_by=ordinal DESC&limit=1&format=json'
+        const leagueData = await fetch('https://www.poewiki.net/w/api.php?action=cargoquery&tables=events&fields=name,ordinal,release_date,release_version,short_name&order_by=ordinal DESC&limit=1&format=json'
           , { method: "GET", })
-        leagueJson = await leaGueData.json();
+        leagueJson = await leagueData.json();
         leagueName = leagueJson.cargoquery[0].title['short name'];
         const [skillGem, currency]: Response[] = await Promise.all([
           fetch('https://poe.ninja/api/data/itemoverview?league=' + leagueName + '&type=SkillGem'
@@ -110,10 +110,10 @@ const App: React.FC<AppProps> = ({ SetSkillGem, SetCurrency, SetCurrencyDetails 
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Layout />}>
-            <Route path='/home' element={<SkillGemInfoList />} />
-            <Route path='/currency' element={<CurrencyList />} />
-            <Route path='/zoosewu' element={<Zoosewu />} />
+          <Route path='./' element={<Layout />}>
+            <Route path='./home' element={<SkillGemInfoList />} />
+            <Route path='./currency' element={<CurrencyList />} />
+            <Route path='./zoosewu' element={<Zoosewu />} />
             <Route index element={<SkillGemInfoList />} />
             <Route path='*' element={<NoMatch />} />
           </Route>
