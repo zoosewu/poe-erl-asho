@@ -106,7 +106,7 @@ const App: React.FC<AppProps> = ({ SetSkillGem, SetCurrency, SetCurrencyDetails 
   }, []);
   return (
     <div className="App">
-      <HashRouter basename='poe-erl-asho/'>
+      <HashRouter>
         <Routes>
           <Route path='/' element={<Layout />}>
             <Route path='/home' element={<SkillGemInfoList />} />
