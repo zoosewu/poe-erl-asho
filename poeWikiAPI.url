@@ -1,0 +1,53 @@
+https://www.poewiki.net/w/api.php?action=cargoquery&
+tables=items,skill_quality,skill&
+join_on=items._pageID=skill_quality._pageID,items._pageID=skill._pageID&
+fields=
+items.name,
+skill.skill_id,
+skill_quality.set_id,
+skill_quality.weight,
+skill_quality.stat_text&
+where=items.name="Blood Rage"&
+order_by=items.name&
+limit=5&
+format=json
+
+https://www.poewiki.net/w/api.php?action=cargoquery&
+tables=items,skill_quality&
+join_on=items._pageID=skill_quality._pageID&
+fields=
+items.name,
+skill_quality.set_id,
+skill_quality.weight,
+skill_quality.stat_text&
+where=items.name="Item Rarity Support"or items.name="Blood Rage"&
+order_by=items.name,skill_quality.set_id&
+limit=15&
+format=json
+
+https://www.poewiki.net/w/api.php?action=cargoquery&
+tables=items,skill_quality,skill_gems&
+join_on=items._pageID=skill_quality._pageID,items._pageID=skill_gems._pageID&
+fields=
+items.name,
+skill_gems.gem_tags,
+skill_quality.set_id,
+skill_quality.weight,
+skill_quality.stat_text&
+where=items.name="Cyclone"or items.name="Shockwave Totem"or items.name="Multistrike Support"
+&order_by=items.name,skill_quality.set_id&
+limit=500&
+format=json
+
+
+https://www.poewiki.net/w/api.php?action=cargoquery&
+tables=events&
+fields=
+name,
+ordinal,
+release_date,
+release_version,
+short_name&
+order_by=ordinal DESC&
+limit=1&
+format=json

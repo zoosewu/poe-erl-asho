@@ -1,0 +1,689 @@
+{
+  "lines": [
+    {
+      "id": 105549,
+      "name": "Anomalous Prismatic Burst Support",
+      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L0VsZW1lbnRhbEJ1cnN0U3VwcG9ydEdlbSIsInciOjEsImgiOjEsInNjYWxlIjoxLCJzcGVjdHJhbCI6dHJ1ZX1d/46ad0c7d13/ElementalBurstSupportGem.png",
+      "levelRequired": 72,
+      "baseType": "Prismatic Burst Support",
+      "variant": "21/23c",
+      "itemClass": 4,
+      "sparkline": {
+        "data": [],
+        "totalChange": 0
+      },
+      "lowConfidenceSparkline": {
+        "data": [
+          0,
+          2.55,
+          5.49,
+          6.8,
+          7.83,
+          13.39,
+          16.64
+        ],
+        "totalChange": 16.64
+      },
+      "implicitModifiers": [],
+      "explicitModifiers": [
+        {
+          "text": "Supported Skills will Trigger Prismatic Burst on Hit",
+          "optional": false
+        }
+      ],
+      "flavourText": "",
+      "corrupted": true,
+      "gemLevel": 21,
+      "gemQuality": 23,
+      "chaosValue": 112807.25,
+      "exaltedValue": 6624.03,
+      "divineValue": 483.16,
+      "count": 1,
+      "detailsId": "anomalous-prismatic-burst-support-21-23c",
+      "tradeInfo": [],
+      "listingCount": 1
+    },
+    {
+      "id": 96363,
+      "name": "Awakened Enlighten Support",
+      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L1N1cHBvcnRQbHVzL0VubGlnaHRlbnBsdXMiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/7ec7d0544d/Enlightenplus.png",
+      "levelRequired": 80,
+      "baseType": "Awakened Enlighten Support",
+      "variant": "5/20c",
+      "itemClass": 4,
+      "sparkline": {
+        "data": [
+          0,
+          16.04,
+          15.83,
+          22.84,
+          null,
+          50.77,
+          55.88
+        ],
+        "totalChange": 55.88
+      },
+      "lowConfidenceSparkline": {
+        "data": [
+          0,
+          16.04,
+          15.83,
+          22.84,
+          54.51,
+          50.77,
+          55.88
+        ],
+        "totalChange": 55.88
+      },
+      "implicitModifiers": [],
+      "explicitModifiers": [
+        {
+          "text": "This Gem gains (95-110)% increased Experience",
+          "optional": false
+        }
+      ],
+      "flavourText": "",
+      "corrupted": true,
+      "gemLevel": 5,
+      "gemQuality": 20,
+      "chaosValue": 72378.8,
+      "exaltedValue": 4250.08,
+      "divineValue": 310,
+      "count": 6,
+      "detailsId": "awakened-enlighten-support-5-20c",
+      "tradeInfo": [],
+      "listingCount": 6
+    },
+    {
+      "id": 96049,
+      "name": "Awakened Empower Support",
+      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L1N1cHBvcnRQbHVzL0VtcG93ZXJQbHVzIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/eb0e6f91ed/EmpowerPlus.png",
+      "levelRequired": 80,
+      "baseType": "Awakened Empower Support",
+      "variant": "5/20c",
+      "itemClass": 4,
+      "sparkline": {
+        "data": [
+          null,
+          null,
+          null,
+          null,
+          0,
+          -7.85,
+          -11.28
+        ],
+        "totalChange": -11.28
+      },
+      "lowConfidenceSparkline": {
+        "data": [
+          0,
+          3.14,
+          11.42,
+          52.76,
+          41.68,
+          30.55,
+          25.7
+        ],
+        "totalChange": 25.7
+      },
+      "implicitModifiers": [],
+      "explicitModifiers": [
+        {
+          "text": "This Gem gains (95-110)% increased Experience",
+          "optional": false
+        },
+        {
+          "text": "+4 to Level of Supported Skill Gems",
+          "optional": false
+        }
+      ],
+      "flavourText": "",
+      "corrupted": true,
+      "gemLevel": 5,
+      "gemQuality": 20,
+      "chaosValue": 53700.4,
+      "exaltedValue": 3153.28,
+      "divineValue": 230,
+      "count": 9,
+      "detailsId": "awakened-empower-support-5-20c",
+      "tradeInfo": [],
+      "listingCount": 9
+    },
+    {
+      "id": 50177,
+      "name": "Phantasmal Cyclone",
+      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9DeWNsb25lIiwidyI6MSwiaCI6MSwic2NhbGUiOjEsInNwZWN0cmFsIjp0cnVlfV0/fe4b5cd541/Cyclone.png",
+      "levelRequired": 72,
+      "baseType": "Cyclone",
+      "variant": "21/23c",
+      "itemClass": 4,
+      "sparkline": {
+        "data": [],
+        "totalChange": 0
+      },
+      "lowConfidenceSparkline": {
+        "data": [
+          null,
+          null,
+          null,
+          null,
+          0,
+          0.19,
+          0
+        ],
+        "totalChange": 0
+      },
+      "implicitModifiers": [],
+      "explicitModifiers": [
+        {
+          "text": "30 to 45 Added Attack Physical Damage",
+          "optional": false
+        },
+        {
+          "text": "8% increased Area of Effect per 1 additional Melee Strike Range",
+          "optional": true
+        },
+        {
+          "text": "8% increased Area of Effect per 0.1 metre additional Melee Strike Range",
+          "optional": false
+        },
+        {
+          "text": "30% less Movement Speed",
+          "optional": false
+        },
+        {
+          "text": "First Hit deals 50% less Damage",
+          "optional": false
+        },
+        {
+          "text": "23% chance to Ignore Stuns While Using this Skill",
+          "optional": false
+        },
+        {
+          "text": "Gains 1 Stage every 0.1 seconds while Channelling",
+          "optional": false
+        },
+        {
+          "text": "Maximum 7 Stages",
+          "optional": false
+        },
+        {
+          "text": "+1 to radius per Stage",
+          "optional": true
+        },
+        {
+          "text": "+0.1 metres to radius per Stage",
+          "optional": false
+        },
+        {
+          "text": "Lose 1 Stage every 0.3 seconds while not Channelling",
+          "optional": false
+        }
+      ],
+      "flavourText": "",
+      "corrupted": true,
+      "gemLevel": 21,
+      "gemQuality": 23,
+      "chaosValue": 23348,
+      "exaltedValue": 1370.99,
+      "divineValue": 100,
+      "count": 1,
+      "detailsId": "phantasmal-cyclone-21-23c",
+      "tradeInfo": [],
+      "listingCount": 1
+    },
+    {
+      "id": 97109,
+      "name": "Awakened Enhance Support",
+      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L1N1cHBvcnRQbHVzL2VuaGFuY2VwbHVzIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d3de7b3bd1/enhanceplus.png",
+      "levelRequired": 80,
+      "baseType": "Awakened Enhance Support",
+      "variant": "5/23c",
+      "itemClass": 4,
+      "sparkline": {
+        "data": [],
+        "totalChange": 0
+      },
+      "lowConfidenceSparkline": {
+        "data": [
+          0,
+          0.12,
+          0.12,
+          0.12,
+          0,
+          0.21,
+          2.22
+        ],
+        "totalChange": 2.22
+      },
+      "implicitModifiers": [],
+      "explicitModifiers": [
+        {
+          "text": "This Gem gains 115% increased Experience",
+          "optional": false
+        },
+        {
+          "text": "+32% to Quality of Supported Skill Gems",
+          "optional": false
+        }
+      ],
+      "flavourText": "",
+      "corrupted": true,
+      "gemLevel": 5,
+      "gemQuality": 23,
+      "chaosValue": 21480.16,
+      "exaltedValue": 1261.31,
+      "divineValue": 92,
+      "count": 3,
+      "detailsId": "awakened-enhance-support-5-23c",
+      "tradeInfo": [],
+      "listingCount": 3
+    },
+    {
+      "id": 96495,
+      "name": "Awakened Enhance Support",
+      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L1N1cHBvcnRQbHVzL2VuaGFuY2VwbHVzIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d3de7b3bd1/enhanceplus.png",
+      "levelRequired": 80,
+      "baseType": "Awakened Enhance Support",
+      "variant": "5/20c",
+      "itemClass": 4,
+      "sparkline": {
+        "data": [
+          0,
+          -5.56,
+          -2.55,
+          null,
+          null,
+          null,
+          18.62
+        ],
+        "totalChange": 18.62
+      },
+      "lowConfidenceSparkline": {
+        "data": [
+          0,
+          -5.56,
+          -2.55,
+          11.84,
+          13.03,
+          13.27,
+          18.62
+        ],
+        "totalChange": 18.62
+      },
+      "implicitModifiers": [],
+      "explicitModifiers": [
+        {
+          "text": "This Gem gains (95-110)% increased Experience",
+          "optional": false
+        },
+        {
+          "text": "+32% to Quality of Supported Skill Gems",
+          "optional": false
+        }
+      ],
+      "flavourText": "",
+      "corrupted": true,
+      "gemLevel": 5,
+      "gemQuality": 20,
+      "chaosValue": 20826.42,
+      "exaltedValue": 1222.93,
+      "divineValue": 89.2,
+      "count": 8,
+      "detailsId": "awakened-enhance-support-5-20c",
+      "tradeInfo": [],
+      "listingCount": 8
+    },
+    {
+      "id": 99847,
+      "name": "Divergent Shockwave Totem",
+      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TaG9ja3dhdmVUb3RlbSIsInciOjEsImgiOjEsInNjYWxlIjoxLCJzcGVjdHJhbCI6dHJ1ZX1d/53d0bf12c8/ShockwaveTotem.png",
+      "levelRequired": 72,
+      "baseType": "Shockwave Totem",
+      "variant": "21/23c",
+      "itemClass": 4,
+      "sparkline": {
+        "data": [],
+        "totalChange": 0
+      },
+      "lowConfidenceSparkline": {
+        "data": [
+          0,
+          0.12,
+          -37.29,
+          -16.57,
+          null,
+          -14.45,
+          66.67
+        ],
+        "totalChange": 66.67
+      },
+      "implicitModifiers": [],
+      "explicitModifiers": [
+        {
+          "text": "Deals 460 to 854 Physical Damage",
+          "optional": false
+        },
+        {
+          "text": "Totem lasts 8 seconds",
+          "optional": false
+        },
+        {
+          "text": "25% chance to Knock Enemies Back on hit",
+          "optional": false
+        },
+        {
+          "text": "46% of Physical Damage Converted to Cold Damage",
+          "optional": false
+        },
+        {
+          "text": "Summons a Totem which uses this Skill",
+          "optional": false
+        }
+      ],
+      "flavourText": "",
+      "corrupted": true,
+      "gemLevel": 21,
+      "gemQuality": 23,
+      "chaosValue": 18678.4,
+      "exaltedValue": 1096.79,
+      "divineValue": 80,
+      "count": 1,
+      "detailsId": "divergent-shockwave-totem-21-23c",
+      "tradeInfo": [],
+      "listingCount": 1
+    },
+    {
+      "id": 95714,
+      "name": "Awakened Enlighten Support",
+      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L1N1cHBvcnRQbHVzL0VubGlnaHRlbnBsdXMiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/7ec7d0544d/Enlightenplus.png",
+      "levelRequired": 72,
+      "baseType": "Awakened Enlighten Support",
+      "variant": "1",
+      "itemClass": 4,
+      "sparkline": {
+        "data": [
+          0,
+          8.93,
+          19.75,
+          22.64,
+          23.87,
+          28.71,
+          63.68
+        ],
+        "totalChange": 63.68
+      },
+      "lowConfidenceSparkline": {
+        "data": [
+          0,
+          8.93,
+          19.75,
+          22.64,
+          23.87,
+          28.71,
+          63.68
+        ],
+        "totalChange": 63.68
+      },
+      "implicitModifiers": [],
+      "explicitModifiers": [
+        {
+          "text": "This Gem gains (5-90)% increased Experience",
+          "optional": true
+        }
+      ],
+      "flavourText": "",
+      "gemLevel": 1,
+      "chaosValue": 18001.31,
+      "exaltedValue": 1057.04,
+      "divineValue": 77.1,
+      "count": 36,
+      "detailsId": "awakened-enlighten-support-1",
+      "tradeInfo": [],
+      "listingCount": 36
+    },
+    {
+      "id": 95795,
+      "name": "Awakened Enlighten Support",
+      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L1N1cHBvcnRQbHVzL0VubGlnaHRlbnBsdXMiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/7ec7d0544d/Enlightenplus.png",
+      "levelRequired": 78,
+      "baseType": "Awakened Enlighten Support",
+      "variant": "1/20",
+      "itemClass": 4,
+      "sparkline": {
+        "data": [
+          null,
+          null,
+          0,
+          3.77,
+          3.77,
+          15.42,
+          17.55
+        ],
+        "totalChange": 17.55
+      },
+      "lowConfidenceSparkline": {
+        "data": [
+          0,
+          9.93,
+          11.2,
+          15.39,
+          15.39,
+          28.35,
+          30.72
+        ],
+        "totalChange": 30.72
+      },
+      "implicitModifiers": [],
+      "explicitModifiers": [
+        {
+          "text": "This Gem gains (95-100)% increased Experience",
+          "optional": false
+        }
+      ],
+      "flavourText": "",
+      "gemLevel": 4,
+      "gemQuality": 20,
+      "chaosValue": 16577.08,
+      "exaltedValue": 973.4,
+      "divineValue": 71,
+      "count": 7,
+      "detailsId": "awakened-enlighten-support-1-20",
+      "tradeInfo": [],
+      "listingCount": 7
+    },
+    {
+      "id": 97590,
+      "name": "Anomalous Item Rarity Support",
+      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L0luY3JlYXNlZFF1YWxpdHkiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MSwic3BlY3RyYWwiOnRydWV9XQ/72f3589210/IncreasedQuality.png",
+      "levelRequired": 72,
+      "baseType": "Item Rarity Support",
+      "variant": "21/23c",
+      "itemClass": 4,
+      "sparkline": {
+        "data": [],
+        "totalChange": 0
+      },
+      "lowConfidenceSparkline": {
+        "data": [
+          0,
+          2.58,
+          5.52,
+          6.71,
+          -0.11,
+          -55.95,
+          -83.1
+        ],
+        "totalChange": -83.1
+      },
+      "implicitModifiers": [],
+      "explicitModifiers": [
+        {
+          "text": "60% increased Rarity of Items Dropped by Enemies Slain from Supported Skills",
+          "optional": false
+        },
+        {
+          "text": "Supported Skills have 2% chance for Coin Shower on Kill",
+          "optional": false
+        }
+      ],
+      "flavourText": "",
+      "corrupted": true,
+      "gemLevel": 21,
+      "gemQuality": 23,
+      "chaosValue": 16343.6,
+      "exaltedValue": 959.69,
+      "divineValue": 70,
+      "count": 1,
+      "detailsId": "anomalous-item-rarity-support-21-23c",
+      "tradeInfo": [],
+      "listingCount": 2
+    },
+    {
+      "id": 43097,
+      "name": "Awakened Multistrike Support",
+      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L1N1cHBvcnRQbHVzL011bHRpcGxlQXR0YWNrc1BsdXMiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/c32ddc2121/MultipleAttacksPlus.png",
+      "levelRequired": 82,
+      "baseType": "Awakened Multistrike Support",
+      "variant": "6/23c",
+      "itemClass": 4,
+      "sparkline": {
+        "data": [
+          null,
+          null,
+          null,
+          0,
+          -0.47,
+          null,
+          null
+        ],
+        "totalChange": -0.47
+      },
+      "lowConfidenceSparkline": {
+        "data": [
+          0,
+          -16.87,
+          -0.53,
+          -8.4,
+          -8.83,
+          -2.18,
+          -15.59
+        ],
+        "totalChange": -15.59
+      },
+      "implicitModifiers": [],
+      "explicitModifiers": [
+        {
+          "text": "Supported Skills Repeat 3 additional times",
+          "optional": false
+        },
+        {
+          "text": "Supported Skills have 47% more Melee Attack Speed",
+          "optional": false
+        },
+        {
+          "text": "Supported Skills deal 20% less Attack Damage",
+          "optional": false
+        },
+        {
+          "text": "Supported Skills deal 11% increased Melee Physical Damage",
+          "optional": false
+        },
+        {
+          "text": "First Repeat of Supported Skills deals 22% more Damage",
+          "optional": false
+        },
+        {
+          "text": "Second Repeat of Supported Skills deals 44% more Damage",
+          "optional": false
+        },
+        {
+          "text": "Third Repeat of Supported Skills deals 66% more Damage",
+          "optional": false
+        }
+      ],
+      "flavourText": "",
+      "corrupted": true,
+      "gemLevel": 6,
+      "gemQuality": 23,
+      "chaosValue": 16156.82,
+      "exaltedValue": 948.73,
+      "divineValue": 69.2,
+      "count": 4,
+      "detailsId": "awakened-multistrike-support-6-23c",
+      "tradeInfo": [],
+      "listingCount": 4
+    },
+    {
+      "id": 103875,
+      "name": "Anomalous Vaal Reap",
+      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9WYWFsR2Vtcy9WYWFsQmxvb2RyZWFwR2VtIiwidyI6MSwiaCI6MSwic2NhbGUiOjEsInNwZWN0cmFsIjp0cnVlfV0/545af3f5a8/VaalBloodreapGem.png",
+      "levelRequired": 72,
+      "baseType": "Vaal Reap",
+      "variant": "21/20c",
+      "itemClass": 4,
+      "sparkline": {
+        "data": [],
+        "totalChange": 0
+      },
+      "lowConfidenceSparkline": {
+        "data": [
+          0,
+          0.11,
+          0.21,
+          null,
+          -3.97,
+          -4.04,
+          182.57
+        ],
+        "totalChange": 182.57
+      },
+      "implicitModifiers": [],
+      "explicitModifiers": [
+        {
+          "text": "Deals 1066 to 1599 Physical Damage",
+          "optional": false
+        },
+        {
+          "text": "Deals 1631.8 Base Physical Damage per second",
+          "optional": false
+        },
+        {
+          "text": "Base duration is 1 seconds",
+          "optional": false
+        },
+        {
+          "text": "Modifiers to Spell Damage apply to this Skill's Damage Over Time effect",
+          "optional": false
+        },
+        {
+          "text": "60% increased Critical Strike Chance",
+          "optional": false
+        },
+        {
+          "text": "Gain a Blood Charge if this Skill Hits Enemies and none of them Die\nLose a Blood Charge when an Enemy Dies while affected by this Skill's Debuff",
+          "optional": false
+        },
+        {
+          "text": "Costs 20% more Life per Blood Charge",
+          "optional": false
+        },
+        {
+          "text": "Deals 15% more Damage per Blood Charge",
+          "optional": false
+        }
+      ],
+      "flavourText": "",
+      "corrupted": true,
+      "gemLevel": 21,
+      "gemQuality": 20,
+      "chaosValue": 15176.2,
+      "exaltedValue": 891.15,
+      "divineValue": 65,
+      "count": 1,
+      "detailsId": "anomalous-vaal-reap-21-20c",
+      "tradeInfo": [],
+      "listingCount": 1
+    }
+  ]
+}

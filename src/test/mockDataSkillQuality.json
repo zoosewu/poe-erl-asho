@@ -1,0 +1,166 @@
+{
+  "cargoquery": [
+    {
+      "title": {
+        "name": "Awakened Empower Support",
+        "gem tags": "Exceptional,Support",
+        "set id": "1",
+        "weight": "50",
+        "stat text": "This Gem gains 5% increased Experience"
+      }
+    },
+    {
+      "title": {
+        "name": "Awakened Enhance Support",
+        "gem tags": "Exceptional,Support",
+        "set id": "1",
+        "weight": "50",
+        "stat text": "This Gem gains 5% increased Experience"
+      }
+    },
+    {
+      "title": {
+        "name": "Awakened Enlighten Support",
+        "gem tags": "Exceptional,Support",
+        "set id": "1",
+        "weight": "50",
+        "stat text": "This Gem gains 5% increased Experience"
+      }
+    },
+    {
+      "title": {
+        "name": "Awakened Multistrike Support",
+        "gem tags": "Attack,Melee,Support",
+        "set id": "1",
+        "weight": "50",
+        "stat text": "Supported Skills deal 0.5% increased Melee Physical Damage"
+      }
+    },
+    {
+      "title": {
+        "name": "Cyclone",
+        "gem tags": "Attack,AoE,Movement,Channelling,Physical,Melee",
+        "set id": "1",
+        "weight": "50",
+        "stat text": "0.5% increased Area of Effect"
+      }
+    },
+    {
+      "title": {
+        "name": "Cyclone",
+        "gem tags": "Attack,AoE,Movement,Channelling,Physical,Melee",
+        "set id": "2",
+        "weight": "100",
+        "stat text": "1% chance to Knock Enemies Back on hit"
+      }
+    },
+    {
+      "title": {
+        "name": "Cyclone",
+        "gem tags": "Attack,AoE,Movement,Channelling,Physical,Melee",
+        "set id": "3",
+        "weight": "100",
+        "stat text": "0.25% more Movement Speed"
+      }
+    },
+    {
+      "title": {
+        "name": "Cyclone",
+        "gem tags": "Attack,AoE,Movement,Channelling,Physical,Melee",
+        "set id": "4",
+        "weight": "100",
+        "stat text": "1% chance to Ignore Stuns While Using this Skill"
+      }
+    },
+    {
+      "title": {
+        "name": "Item Rarity Support",
+        "gem tags": "Support",
+        "set id": "1",
+        "weight": "10000",
+        "stat text": "0.5% increased Rarity of Items Dropped by Enemies Slain from Supported Skills"
+      }
+    },
+    {
+      "title": {
+        "name": "Item Rarity Support",
+        "gem tags": "Support",
+        "set id": "2",
+        "weight": "1",
+        "stat text": "Supported Skills have 0.1% chance for Coin Shower on Kill"
+      }
+    },
+    {
+      "title": {
+        "name": "Prismatic Burst Support",
+        "gem tags": "Support,Spell,AoE,Fire,Cold,Lightning,Prismatic,Trigger",
+        "set id": "1",
+        "weight": "100",
+        "stat text": "1% increased Elemental Damage"
+      }
+    },
+    {
+      "title": {
+        "name": "Prismatic Burst Support",
+        "gem tags": "Support,Spell,AoE,Fire,Cold,Lightning,Prismatic,Trigger",
+        "set id": "2",
+        "weight": "50",
+        "stat text": "0.05% increased Spell Damage per 10 Intelligence"
+      }
+    },
+    {
+      "title": {
+        "name": "Prismatic Burst Support",
+        "gem tags": "Support,Spell,AoE,Fire,Cold,Lightning,Prismatic,Trigger",
+        "set id": "3",
+        "weight": "50",
+        "stat text": "+0.5% to Critical Strike Multiplier if Dexterity is higher than Intelligence"
+      }
+    },
+    {
+      "title": {
+        "name": "Prismatic Burst Support",
+        "gem tags": "Support,Spell,AoE,Fire,Cold,Lightning,Prismatic,Trigger",
+        "set id": "4",
+        "weight": "50",
+        "stat text": "0.1% increased Area of Effect per 50 Strength"
+      }
+    },
+    {
+      "title": {
+        "name": "Shockwave Totem",
+        "gem tags": "Totem,Spell,AoE,Physical,Nova",
+        "set id": "1",
+        "weight": "50",
+        "stat text": "Supported Skills have 1% increased Totem Life"
+      }
+    },
+    {
+      "title": {
+        "name": "Shockwave Totem",
+        "gem tags": "Totem,Spell,AoE,Physical,Nova",
+        "set id": "2",
+        "weight": "100",
+        "stat text": "1% increased Totem Placement speed&lt;br&gt;0.5% increased Cast Speed"
+      }
+    },
+    {
+      "title": {
+        "name": "Shockwave Totem",
+        "gem tags": "Totem,Spell,AoE,Physical,Nova",
+        "set id": "3",
+        "weight": "20",
+        "stat text": "2% of Physical Damage Converted to Cold Damage"
+      }
+    },
+    {
+      "title": {
+        "name": "Shockwave Totem",
+        "gem tags": "Totem,Spell,AoE,Physical,Nova",
+        "set id": "4",
+        "weight": "100",
+        "stat text": "1% chance to Knock Enemies Back on hit"
+      }
+    }
+  ]
+}

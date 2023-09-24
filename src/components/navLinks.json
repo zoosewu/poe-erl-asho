@@ -1,0 +1,14 @@
+[
+  {
+    "label": "寶石價格",
+    "href": "home"
+  },
+  {
+    "label": "通貨價格",
+    "href": "currency"
+  },
+  {
+    "label": "寶石品質",
+    "href": "qualityInfo"
+  }
+]
