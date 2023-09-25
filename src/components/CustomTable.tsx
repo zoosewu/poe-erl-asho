@@ -27,10 +27,11 @@ export const CustomTableFactory = <P extends any>() => {
     }, [data])
     useEffect(() => {
       if (data == null) return
-      if (listedProperty!.has(sortBy)) {
-        data.sort(listedProperty!.get(sortBy)?.GetComparer)
-      } else if (listedProperty!.has(sortBy.substring(1))) {
-        data.sort((a, b) => (-1 * (listedProperty!.get(sortBy.substring(1))!.GetComparer(a, b))))
+      if (listedProperty == null) return
+      if (listedProperty.has(sortBy)) {
+        data.sort(listedProperty.get(sortBy)?.GetComparer)
+      } else if (listedProperty.has(sortBy.substring(1))) {
+        data.sort((a, b) => (-1 * (listedProperty.get(sortBy.substring(1))!.GetComparer(a, b))))
       }
       SetSortedData(Object.assign([], data))
     }, [listedProperty, sortBy, data])
