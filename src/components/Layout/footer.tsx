@@ -7,7 +7,7 @@ const Footer: React.FC = () => {
     <Container fluid className='bg-light py-3'>
       <Container>
         <p className='text-center mb-0'>
-          © 2023-{new Date().getFullYear()} {pkg.displayName}. All rights reserved.
+          © 2023-{new Date().getFullYear()} {pkg.displayName}. All rights reserved. v.{pkg.version}
         </p>
       </Container>
     </Container>

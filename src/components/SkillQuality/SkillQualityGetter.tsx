@@ -52,8 +52,8 @@ function GetPOEWikiQualityInfoCountUrl (gemName: string[]) {
     'tables=items,skill_quality,skill_gems&' +
     'join_on=items._pageID=skill_quality._pageID,items._pageID=skill_gems._pageID&' +
     'fields=COUNT(items.name)=count&' +
-    'where=' + where +
-    '&order_by=items.name,skill_quality.set_id&' +
+    // 'where=' + where +'&'
+    'order_by=items.name,skill_quality.set_id&' +
     'limit=1&' +
     'format=json'
 }
@@ -70,8 +70,8 @@ function GetPOEWikiSkillQualityInfoUrl (gemName: string[], offsetIndex: number |
     'skill_quality.set_id,' +
     'skill_quality.weight,' +
     'skill_quality.stat_text&' +
-    'where=' + where +
-    '&order_by=items.name,skill_quality.set_id&' +
+    // 'where=' + where +'&'
+    'order_by=items.name,skill_quality.set_id&' +
     'limit=500&' +
     'format=json' + offset
 }
