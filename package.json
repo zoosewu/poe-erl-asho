@@ -26,10 +26,13 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && npm version patch",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "lint": "ts-standard --fix",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "preversion": "npm test",
+    "version": "npm run build && git add -A dist",
+    "postversion": "git push && git push --tags && rm -rf build/temp"
   },
   "eslintConfig": {
     "extends": [

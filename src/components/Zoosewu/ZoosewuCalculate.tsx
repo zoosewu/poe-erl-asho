@@ -97,7 +97,7 @@ export const ZoosewuCalculate = async (props: ZoosewuProps): Promise<CalculatedD
       }
       newCalculatedData.push(calculatedData)
       if (!variant.name.includes('Awakened') && skillQuality.has(gem.name)) {
-        if (!qualityInfo.tags) console.log('qualityInfo.tags error', qualityInfo.tags)
+        if (!qualityInfo.tags) console.log('qualityInfo.tags error', qualityInfo.name)
         if (qualityInfo.tags.includes('Spell') || qualityInfo.tags.includes('Attack') || qualityInfo.tags.includes('Warcry')) calculatedData.lensCost = primeRegradingLens
         else if (qualityInfo.tags.includes('Support')) calculatedData.lensCost = secondaryRegradingLens
         else console.log('gem type error', variant.name, qualityInfo.tags)
