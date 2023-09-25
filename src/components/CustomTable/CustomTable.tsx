@@ -37,6 +37,7 @@ export const CustomTableFactory = <P extends any>() => {
     }, [listedProperty, sortBy, data])
     useEffect(() => {
       if (searchedValue === '' || (sortedData == null) || (listedProperty == null)) {
+        console.log('searchedValue', sortedData)
         SetSearchedData(sortedData)
         return
       }
