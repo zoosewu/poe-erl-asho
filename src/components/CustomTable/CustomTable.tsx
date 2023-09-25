@@ -36,12 +36,10 @@ export const CustomTableFactory = <P extends any>() => {
       SetSortedData(Object.assign([], data))
     }, [listedProperty, sortBy, data])
     useEffect(() => {
-      console.log('searchedValue 1', searchedValue)
       if (searchedValue === '' || (sortedData == null) || (listedProperty == null)) {
         SetSearchedData(sortedData)
         return
       }
-      console.log('searchedValue 2', sortedData, listedProperty)
       const newSearchedData: P[] = []
       let searchingType = ''
       let searchingValue = searchedValue.toLowerCase()
@@ -59,7 +57,7 @@ export const CustomTableFactory = <P extends any>() => {
           }
         }
       }
-      console.log('searchedValue 3', newSearchedData)
+      console.log('searchedValue', newSearchedData)
       SetSearchedData(newSearchedData)
     }, [listedProperty, sortedData, searchedValue])
 

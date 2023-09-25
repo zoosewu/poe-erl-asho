@@ -1,9 +1,21 @@
-// from API
-export interface SkillQualityInfoRoot {
-  cargoquery: Cargoquery[]
+export interface SkillQualityInfoCountRoot {
+  cargoquery: SkillQualityInfoCountCargoquery[]
 }
 
-export interface Cargoquery {
+export interface SkillQualityInfoCountCargoquery {
+  title: Title
+}
+
+export interface Title {
+  count: string
+}
+
+// from API
+export interface SkillQualityInfoRoot {
+  cargoquery: SkillQualityInfoCargoquery[]
+}
+
+export interface SkillQualityInfoCargoquery {
   title: SkillQualityInfo
 }
 

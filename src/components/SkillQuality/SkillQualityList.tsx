@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { Currency, CurrencyDetail } from '../../Type/CurrencyInfoType'
 import { SetCurrency } from '../../redux/actions'
 import { connect } from 'react-redux'
 import CustomTableFactory, { ListedProperty } from '../CustomTable/CustomTable'
@@ -41,7 +40,7 @@ const SkillQualityList: React.FC<SkillQualityListProps> = ({ skillQuality }) => 
       ['Type4 Weight', {
         GetPropertyValue: (data) => (GetQualityTypeWeight(data, 4)),
         GetComparer: function (dataA, dataB) { return this.GetPropertyValue(dataB) - this.GetPropertyValue(dataA) }
-      } as ListedProperty<SkillQuality>],
+      } as ListedProperty<SkillQuality>]
     ]))
   }, [skillQuality])
   return (
@@ -51,6 +50,6 @@ const SkillQualityList: React.FC<SkillQualityListProps> = ({ skillQuality }) => 
   )
 }
 const mapStateToProps = (state: { skillQuality: Map<string, SkillQuality> }) => ({
-  skillQuality: state.skillQuality,
+  skillQuality: state.skillQuality
 })
 export default connect(mapStateToProps, { SetCurrency })(SkillQualityList)

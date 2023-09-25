@@ -7,7 +7,7 @@ export const POENinjaSkillGemAdapter = (root: SkillGemInfoRoot): Map<string, Ski
     let isVaalSkill = false
     let baseType: string = info.baseType
     const baseTypeSplit = baseType.split(' ')
-    if (baseTypeSplit.indexOf('Vaal') > -1) {
+    if (baseTypeSplit.includes('Vaal')) {
       baseType = baseTypeSplit.splice(baseTypeSplit.indexOf('Vaal') + 1).join(' ')
       isVaalSkill = true
     }
@@ -37,8 +37,8 @@ export const POENinjaSkillGemAdapter = (root: SkillGemInfoRoot): Map<string, Ski
       level: info.gemLevel,
       quality: info.gemQuality || 0,
       corrupted: info.corrupted || false,
-      isVaalSkill: isVaalSkill,
-      qualityType: qualityType,
+      isVaalSkill,
+      qualityType,
       chaosValue: info.chaosValue,
       divineValue: info.divineValue,
       totalChange: info.sparkline.totalChange,
