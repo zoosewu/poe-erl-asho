@@ -4,17 +4,28 @@ import { SkillGem, SkillGemInfoRoot, SkillGemVariant } from '../Type/SkillGemInf
 export const POENinjaSkillGemAdapter = (root: SkillGemInfoRoot): Map<string, SkillGem> => {
   const map: Map<string, SkillGem> = new Map<string, SkillGem>()
   for (const info of root.lines) {
+    let isVaalSkill = false
+    let baseType: string = info.baseType
+    const baseTypeSplit = baseType.split(' ')
+    if (baseTypeSplit.indexOf('Vaal') > -1) {
+      baseType = baseTypeSplit.splice(baseTypeSplit.indexOf('Vaal') + 1).join(' ')
+      isVaalSkill = true
+    }
     let skillGem: SkillGem
-    if (map.has(info.baseType)) {
-      skillGem = map.get(info.baseType)!
+    if (map.has(baseType)) {
+      skillGem = map.get(baseType)!
+      if (isVaalSkill && skillGem.vaalIcon === undefined) skillGem.vaalIcon = (<Image src={info?.icon} width='30px' height='30px' />)
+      else if (skillGem.icon === undefined) skillGem.icon = (<Image src={info?.icon} width='30px' height='30px' />)
     } else {
       skillGem = {
-        icon: (<Image src={info?.icon} width='30px' height='30px' />),
-        name: info.baseType,
-        id: info.id,
+        icon: undefined,
+        vaalIcon: undefined,
+        name: baseType,
         variant: []
       } as SkillGem
-      map.set(info.baseType, skillGem)
+      if (isVaalSkill) skillGem.vaalIcon = (<Image src={info?.icon} width='30px' height='30px' />)
+      else skillGem.icon = (<Image src={info?.icon} width='30px' height='30px' />)
+      map.set(baseType, skillGem)
     }
     let qualityType: number
     if (info.name.includes('Anomalous')) qualityType = 2
@@ -26,7 +37,8 @@ export const POENinjaSkillGemAdapter = (root: SkillGemInfoRoot): Map<string, Ski
       level: info.gemLevel,
       quality: info.gemQuality || 0,
       corrupted: info.corrupted || false,
-      qualityType,
+      isVaalSkill: isVaalSkill,
+      qualityType: qualityType,
       chaosValue: info.chaosValue,
       divineValue: info.divineValue,
       totalChange: info.sparkline.totalChange,

@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
-import SkillGemInfoList from './components/SkillGemInfoList'
-import CurrencyList from './components/CurrencyInfoList'
+import SkillGemList from './components/SkillGem/SkillGemList'
+import CurrencyList from './components/Currency/CurrencyList'
 import './App.scss'
-import Layout from './components/layout'
+import Layout from './components/Layout/layout'
 import { Routes, Route, HashRouter } from 'react-router-dom'
-import NoMatch from './components/NoMatch'
+import NoMatch from './components/Layout/NoMatch'
 import { connect } from 'react-redux'
 import { SetSkillGem, SetCurrency, SetCurrencyDetails } from './redux/actions'
 import mockDataSkillGem from './test/mockDataSkillGem.json'
@@ -12,10 +12,11 @@ import mockDataCurrency from './test/mockDataCurrency.json'
 import mockDataLeagueInfo from './test/mockDataLeagueInfo.json'
 import { CurrencyInfoRoot } from './Type/CurrencyInfoType'
 import { LeagueInfoRoot } from './Type/LeagueInfoType'
-import Zoosewu from './components/Zoosewu'
+import Zoosewu from './components/Zoosewu/Zoosewu'
 import { SkillGemInfoRoot } from './Type/SkillGemInfoType'
 import { POENinjaSkillGemAdapter } from './Adapter/POENinjaSkillGemAdapter'
 import { POENinjaCurrencyAdapter } from './Adapter/POENinjaCurrencyAdapter'
+import SkillQualityList from './components/SkillQuality/SkillQualityList'
 interface AppProps {
   SetSkillGem: typeof SetSkillGem
   SetCurrency: typeof SetCurrency
@@ -62,10 +63,11 @@ const App: React.FC<AppProps> = ({ SetSkillGem, SetCurrency, SetCurrencyDetails 
       <HashRouter>
         <Routes>
           <Route path='/' element={<Layout />}>
-            <Route path='/home' element={<SkillGemInfoList />} />
+            <Route path='/home' element={<SkillGemList />} />
             <Route path='/currency' element={<CurrencyList />} />
+            <Route path='/skillQuality' element={<SkillQualityList />} />SkillQualityList
             <Route path='/zoosewu' element={<Zoosewu />} />
-            <Route index element={<SkillGemInfoList />} />
+            <Route index element={<SkillGemList />} />
             <Route path='*' element={<NoMatch />} />
           </Route>
         </Routes>

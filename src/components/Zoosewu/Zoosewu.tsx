@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { Currency } from '../Type/CurrencyInfoType'
+import { Currency } from '../../Type/CurrencyInfoType'
 import { connect } from 'react-redux'
-import { CustomTableFactory, ListedProperty } from './CustomTable'
-import { SkillGem } from '../Type/SkillGemInfoType'
-import { SkillQuality } from '../Type/SkillQualityType'
-import { SetSkillQuality } from '../redux/actions'
-import { CalculatedData } from '../Type/CalculateType'
+import { CustomTableFactory, ListedProperty } from '../CustomTable/CustomTable'
+import { SkillGem } from '../../Type/SkillGemInfoType'
+import { SkillQuality } from '../../Type/SkillQualityType'
+import { SetSkillQuality } from '../../redux/actions'
+import { CalculatedData } from '../../Type/CalculateType'
 import { ZoosewuCalculate } from './ZoosewuCalculate'
 export interface ZoosewuProps {
   currency: Currency[]
@@ -38,16 +38,16 @@ const Zoosewu: React.FC<ZoosewuProps> = (props) => {
         GetComparer: (dataA, dataB) => (dataB.quality - dataA.quality)
       } as ListedProperty<CalculatedData>],
       ['Cost', {
-        GetPropertyValue: (data) => (data.GemCost),
-        GetComparer: (dataA, dataB) => (dataB.GemCost - dataA.GemCost)
+        GetPropertyValue: (data) => (data.gemCost),
+        GetComparer: (dataA, dataB) => (dataB.gemCost - dataA.gemCost)
       } as ListedProperty<CalculatedData>],
       ['Lens Income', {
-        GetPropertyValue: (data) => (data.LensIncome),
-        GetComparer: (dataA, dataB) => (dataB.LensIncome - dataA.LensIncome)
+        GetPropertyValue: (data) => (data.lensIncome),
+        GetComparer: (dataA, dataB) => (dataB.lensIncome - dataA.lensIncome)
       } as ListedProperty<CalculatedData>],
       ['Vaal Income', {
-        GetPropertyValue: (data) => (data.VaalIncome),
-        GetComparer: (dataA, dataB) => (dataB.VaalIncome - dataA.VaalIncome)
+        GetPropertyValue: (data) => (data.vaalIncome),
+        GetComparer: (dataA, dataB) => (dataB.vaalIncome - dataA.vaalIncome)
       } as ListedProperty<CalculatedData>],
       ['EarningsYield', {
         GetPropertyValue: (data) => (data.earningsYield),

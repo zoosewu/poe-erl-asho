@@ -2,7 +2,7 @@ import React from 'react'
 import { Navbar, Nav } from 'react-bootstrap'
 import navLinks from './navLinks.json'
 import { Link } from 'react-router-dom'
-import pkg from '../../package.json'
+import pkg from '../../../package.json'
 
 const Header: React.FC = () => {
   return (

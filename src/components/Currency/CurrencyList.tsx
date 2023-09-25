@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { Currency, CurrencyDetail } from '../Type/CurrencyInfoType'
-import { SetCurrency } from '../redux/actions'
+import { Currency, CurrencyDetail } from '../../Type/CurrencyInfoType'
+import { SetCurrency } from '../../redux/actions'
 import { connect } from 'react-redux'
-import CustomTableFactory, { ListedProperty } from './CustomTable'
+import CustomTableFactory, { ListedProperty } from '../CustomTable/CustomTable'
 interface CurrencyListProps {
   currency: Currency[]
   currencyDetails: Map<string, CurrencyDetail>

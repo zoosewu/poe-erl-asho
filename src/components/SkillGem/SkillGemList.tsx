@@ -1,31 +1,27 @@
 import React, { useEffect, useState } from 'react'
-import { SkillGem, SkillGemVariant } from '../Type/SkillGemInfoType'
+import { SkillGem, SkillGemVariant } from '../../Type/SkillGemInfoType'
 import { connect } from 'react-redux'
-import CustomTableFactory, { ListedProperty } from './CustomTable'
-interface SkillGemInfoListProps {
+import CustomTableFactory, { ListedProperty } from '../CustomTable/CustomTable'
+interface SkillGemListProps {
   skillGem: Map<string, SkillGem>
 }
 interface SkillGemVariantInfo extends SkillGemVariant {
   base: SkillGem
 }
-const SkillGemInfoList: React.FC<SkillGemInfoListProps> = ({ skillGem }) => {
-  console.log('SkillGemInfoList Table')
+const SkillGemList: React.FC<SkillGemListProps> = ({ skillGem }) => {
+  console.log('SkillGemList Table')
   const Table = CustomTableFactory<SkillGemVariantInfo>()
   const [listedProperty, SetListedProperty] = useState<Map<string, ListedProperty<SkillGemVariantInfo>>>()
   const [skillGemVariantInfo, SetSkillGemVariantInfo] = useState<SkillGemVariantInfo[]>()
   useEffect(() => {
     SetListedProperty(new Map<string, ListedProperty<SkillGemVariantInfo>>([
       ['Icon', {
-        GetPropertyValue: (data) => (data.base.icon),
-        GetComparer: (dataA, dataB) => (dataB.base.id - dataA.base.id)
+        GetPropertyValue: (data) => (data.isVaalSkill ? data.base.vaalIcon : data.base.icon),
+        GetComparer: (dataA, dataB) => (dataB.name.localeCompare(dataA.name))
       } as ListedProperty<SkillGemVariantInfo>],
       ['Name', {
         GetPropertyValue: (data) => (data.name),
         GetComparer: (dataA, dataB) => (dataB.name.localeCompare(dataA.name))
-      } as ListedProperty<SkillGemVariantInfo>],
-      ['ID', {
-        GetPropertyValue: (data) => (data.base.id),
-        GetComparer: (dataA, dataB) => (dataB.base.id - dataA.base.id)
       } as ListedProperty<SkillGemVariantInfo>],
       ['Level', {
         GetPropertyValue: (data) => (data.level),
@@ -87,4 +83,4 @@ const SkillGemInfoList: React.FC<SkillGemInfoListProps> = ({ skillGem }) => {
 const mapStateToProps = (state: { skillGem: Map<string, SkillGem> }) => ({
   skillGem: state.skillGem
 })
-export default connect(mapStateToProps)(SkillGemInfoList)
+export default connect(mapStateToProps)(SkillGemList)

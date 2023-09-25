@@ -53,7 +53,7 @@ export const CustomTableFactory = <P extends any>() => {
       for (const item of sortedData) {
         for (const [key, property] of listedProperty) {
           if (searchingType !== '' && key.toLowerCase() !== searchingType) continue
-          if (property.GetPropertyValue(item).toString().toLowerCase().includes(searchingValue)) {
+          if (property.GetPropertyValue(item)?.toString().toLowerCase().includes(searchingValue)) {
             newSearchedData.push(item)
             break
           }

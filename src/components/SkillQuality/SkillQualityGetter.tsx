@@ -1,5 +1,5 @@
-import { SkillQualityInfoRoot, SkillQuality, SkillQualityDetail } from '../Type/SkillQualityType'
-import mockDataSkillQuality from '../test/mockDataSkillQuality.json'
+import { SkillQualityInfoRoot, SkillQuality, SkillQualityDetail } from '../../Type/SkillQualityType'
+import mockDataSkillQuality from '../../test/mockDataSkillQuality.json'
 export async function GetSkillQuality (gemNames: string[]): Promise<Map<string, SkillQuality>> {
   const url = GetPOEWikiAPIUrl(gemNames)
   console.log('GetSkillQuality url', url)

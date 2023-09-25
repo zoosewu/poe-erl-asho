@@ -6,10 +6,11 @@ export interface CalculatedData {
   baseType: string
   level: number
   quality: number
-  GemCost: number
-  LensCost: number
-  LensIncome: number
-  VaalIncome: number
+  gemCost: number
+  lensCost: number
+  lensIncome: number
+  vaalIncome: number
+  doubleVaalIncome: number
   earningsYield: number
   details: CalculatedDetail[]
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container } from 'react-bootstrap'
-import pkg from '../../package.json'
+import pkg from '../../../package.json'
 
 const Footer: React.FC = () => {
   return (

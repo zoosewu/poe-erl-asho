@@ -40,9 +40,9 @@ export interface ExplicitModifier {
 
 // from custom
 export interface SkillGem {
-  icon: string | ReactNode
+  icon: ReactNode | undefined
+  vaalIcon: ReactNode | undefined
   name: string
-  id: number
   variant: SkillGemVariant[]
 }
 export interface SkillGemVariant {
@@ -50,6 +50,7 @@ export interface SkillGemVariant {
   level: number
   quality: number
   corrupted: boolean
+  isVaalSkill: boolean
   qualityType: number
   chaosValue: number
   divineValue: number
