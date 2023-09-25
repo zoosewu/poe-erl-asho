@@ -1,4 +1,4 @@
-import { ReactNode } from "react"
+import { ReactNode } from 'react'
 
 export interface SkillGemInfoRoot {
   lines: SkillGemInfo[]
@@ -27,9 +27,9 @@ export interface SkillGemInfo {
   tradeInfo: any[]
   listingCount: number
 }
-type Nullable<T> = T | null;
+type Nullable<T> = T | null
 export interface SparkLine {
-  data: Nullable<number>[]
+  data: Array<Nullable<number>>
   totalChange: number
 }
 
@@ -38,7 +38,7 @@ export interface ExplicitModifier {
   optional: boolean
 }
 
-//from custom
+// from custom
 export interface SkillGem {
   icon: string | ReactNode
   name: string

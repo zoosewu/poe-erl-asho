@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react'
 const NoMatch: React.FC = () => {
-  return <div>Something went wrong</div>;
-};
+  return <div>Something went wrong</div>
+}
 
-export default NoMatch;
+export default NoMatch

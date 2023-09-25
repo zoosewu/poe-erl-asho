@@ -1,8 +1,8 @@
-import { Table } from "react-bootstrap";
-import PaginationItem from "./PaginationItem";
-import React, { ReactNode, useEffect, useState } from "react";
-import Spinning from "./Spinning";
-import { useSearchParams } from "react-router-dom";
+import { Form, InputGroup, Table } from 'react-bootstrap'
+import PaginationItem from './PaginationItem'
+import React, { useCallback, useEffect, useState } from 'react'
+import Spinning from './Spinning'
+import { useSearchParams } from 'react-router-dom'
 export interface ListedProperty<P> {
   propertyName: string
   GetPropertyValue: (data: P) => any
@@ -13,74 +13,115 @@ interface CustomTableProps<P> {
   listedProperty?: Map<string, ListedProperty<P>>
 }
 
-
-
 export const CustomTableFactory = <P extends any>() => {
   const CustomTable: React.FC<CustomTableProps<P>> = ({ data, listedProperty }) => {
-    const [stateData, setStateData] = useState<P[]>()
-    const [searchParams, setSearchParams] = useSearchParams();
-    const sortBy: string = searchParams.get('sortBy') || ''
-    const currentPage: number = parseInt(searchParams.get('page') as string) || 1
+    const [sortedData, SetSortedData] = useState<P[]>()
+    const [searchedValue, SetSearchedValue] = useState<string>('')
+    const [searchedData, SetSearchedData] = useState<P[]>()
+    const [searchParams, SetSearchParams] = useSearchParams()
+    const sortBy: string = searchParams.get('sortBy') ?? ''
+    const currentPage: number = parseInt(searchParams.get('page') as string) ?? 1
     useEffect(() => {
-      console.log('data',stateData,data)
-      if (!data) return;
-      setStateData(data)
-    }, [data]);
+      if (data == null) return
+      SetSortedData(data)
+    }, [data])
     useEffect(() => {
-      console.log('sortBy 1',stateData,data)
-      if (!stateData) return;
-      console.log('sortBy 2')
+      if (data == null) return
       if (listedProperty!.has(sortBy)) {
-        console.log('sortBy has')
-        stateData.sort(listedProperty!.get(sortBy)?.GetComparer)
+        data.sort(listedProperty!.get(sortBy)?.GetComparer)
       } else if (listedProperty!.has(sortBy.substring(1))) {
-        console.log('sortBy has r')
-        stateData.sort((a, b) => (-1 * (listedProperty!.get(sortBy.substring(1))!.GetComparer(a, b))))
+        data.sort((a, b) => (-1 * (listedProperty!.get(sortBy.substring(1))!.GetComparer(a, b))))
       }
-      setStateData(Object.assign([], stateData))
-    }, [sortBy, data]);
+      SetSortedData(Object.assign([], data))
+    }, [listedProperty, sortBy, data])
+    useEffect(() => {
+      console.log('searchedValue 1', searchedValue)
+      if (searchedValue === '' || (sortedData == null) || (listedProperty == null)) {
+        SetSearchedData(sortedData)
+        return
+      }
+      console.log('searchedValue 2', sortedData, listedProperty)
+      const newSearchedData: P[] = []
+      let searchingType = ''
+      let searchingValue = searchedValue.toLowerCase()
+      if (searchedValue.includes(':')) {
+        const searchSplit = searchedValue.split(':')
+        searchingType = searchSplit[0].toLowerCase()
+        searchingValue = searchSplit.splice(1).join(':').toLowerCase()
+      }
+      for (const item of sortedData) {
+        for (const [key, property] of listedProperty) {
+          if (searchingType !== '' && key.toLowerCase() !== searchingType) continue
+          if (property.GetPropertyValue(item).toString().toLowerCase().includes(searchingValue)) {
+            newSearchedData.push(item)
+            break
+          }
+        }
+      }
+      console.log('searchedValue 3', newSearchedData)
+      SetSearchedData(newSearchedData)
+    }, [listedProperty, sortedData, searchedValue])
 
-    const sort = (newSortBy: string) => {
-      if (!newSortBy) return;
-      if (!listedProperty!.has(newSortBy) && !listedProperty!.has(newSortBy.substring(1))) return;
-      searchParams.set('sortBy', sortBy === newSortBy ? 'r' + newSortBy : newSortBy)
-      setSearchParams(searchParams)
-    }
-    if (!stateData) {
+    const sort = useCallback(
+      (newSortBy: string) => {
+        if (!newSortBy) return
+        if (!listedProperty!.has(newSortBy) && !listedProperty!.has(newSortBy.substring(1))) return
+        searchParams.set('sortBy', sortBy === newSortBy ? 'r' + newSortBy : newSortBy)
+        SetSearchParams(searchParams)
+      }, [listedProperty, SetSearchParams, searchParams, sortBy])
+
+    const handleChange = useCallback(
+      (event: React.ChangeEvent<HTMLInputElement>) => {
+        const target = event.target
+        const value = target.type === 'checkbox' ? target.checked.toString() : target.value
+        SetSearchedValue(value)
+        // const name = target.name as any;
+        // console.log(event, target, value, name)
+      }, [SetSearchedValue])
+    const renderCaret = useCallback(
+      (name: string) => {
+        if (sortBy === name) return <i className='bi bi-caret-down-fill' />
+        if (sortBy === 'r' + name) return <i className='bi bi-caret-up-fill' />
+        return <i className='bi bi-caret-down' />
+      }, [sortBy])
+    if (searchedData == null) {
       return (
         <Spinning />
-      );
-    }
-    const renderCaret = (name: string) => {
-      if (sortBy === name) return <i className="bi bi-caret-down-fill" />
-      if (sortBy === 'r' + name) return <i className="bi bi-caret-up-fill" />
-      return <i className="bi bi-caret-down" />
+      )
     }
     const listAmount: number = 50
-    const pages: number = Math.ceil(stateData.length / listAmount)
+    const pages: number = Math.ceil(searchedData.length / listAmount)
     return (
-      <>
-        <Table striped bordered hover size="sm">
+      <div className='my-5 px-5'>
+        <InputGroup className='px-5 my-3'>
+          <Form.Control
+            placeholder='Name:Anomalous Prismatic Burst Support'
+            aria-label='search'
+            aria-describedby='search-table'
+            onChange={handleChange.bind(this)}
+          />
+        </InputGroup>
+        <Table striped bordered hover size='sm'>
           <thead>
             <tr>
               {[...listedProperty!.keys()].map((key, index) => (
-                <th key={key} colSpan={index == 1 ? 2 : 1} onClick={() => sort(key)}>{key}{renderCaret(key)}</th>
+                <th key={key} colSpan={index === 1 ? 2 : 1} onClick={() => sort(key)}>{key}{renderCaret(key)}</th>
               ))}
             </tr>
           </thead>
 
           <tbody>
-            {[...stateData].splice((currentPage - 1) * listAmount, listAmount).map((d, index) => (
+            {[...searchedData].splice((currentPage - 1) * listAmount, listAmount).map((d, index) => (
               <tr key={index}>
                 {[...listedProperty!.values()].map((value, i) => (
-                  <td key={i} className="align-middle text-center" colSpan={i == 1 ? 2 : 1}>{value.GetPropertyValue(d)}</td>
+                  <td key={i} className='align-middle text-center' colSpan={i === 1 ? 2 : 1}>{value.GetPropertyValue(d)}</td>
                 ))}
               </tr>
             ))}
           </tbody>
         </Table>
         <PaginationItem amount={pages} visiblePageLength={4} />
-      </ >
+      </div>
     )
   }
   return CustomTable

@@ -1,5 +1,5 @@
-import { ReactNode } from "react"
-import { SparkLine } from "./SkillGemInfoType"
+import { ReactNode } from 'react'
+import { SparkLine } from './SkillGemInfoType'
 export interface CurrencyInfoRoot {
   lines: CurrencyInfo[]
   currencyDetails: CurrencyDetail[]
@@ -34,7 +34,7 @@ export interface CurrencyDetail {
   tradeId?: string
 }
 
-//from custom
+// from custom
 export interface Currency {
   icon: string | ReactNode
   name: string

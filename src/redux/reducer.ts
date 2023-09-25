@@ -1,7 +1,7 @@
-import { SET_SKILL_GEM_DATA, SET_CURRENCY_DATA, SET_CURRENCY_DETAIL_DATA, SET_SKILL_QUALITY_DATA } from './actionTypes';
+import { SET_SKILL_GEM_DATA, SET_CURRENCY_DATA, SET_CURRENCY_DETAIL_DATA, SET_SKILL_QUALITY_DATA } from './actionTypes'
 import { SkillGem } from '../Type/SkillGemInfoType'
-import { CurrencyInfo as Currency, CurrencyDetail } from '../Type/CurrencyInfoType';
-import { SkillQuality, SkillQualityInfo } from '../Type/SkillQualityType';
+import { CurrencyInfo as Currency, CurrencyDetail } from '../Type/CurrencyInfoType'
+import { SkillQuality } from '../Type/SkillQualityType'
 
 const initialSkillGemInfoState: Map<string, SkillGem> = new Map<string, SkillGem>()
 export const skillGemReducer = (state = initialSkillGemInfoState, action: any): Map<string, SkillGem> => {

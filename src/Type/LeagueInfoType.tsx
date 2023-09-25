@@ -9,8 +9,8 @@ export interface LeagueInfo {
 export interface Title {
   name: string
   ordinal: string
-  "release date": string
-  "release version": string
-  "short name": string
-  "release date__precision": string
+  'release date': string
+  'release version': string
+  'short name': string
+  'release date__precision': string
 }
