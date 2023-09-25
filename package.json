@@ -32,7 +32,7 @@
     "eject": "react-scripts eject",
     "preversion": "npm test",
     "version": "npm run build && git add -A docs",
-    "postversion": "git push && git push --tags && rm -rf build/temp"
+    "postversion": "git push && git push --tags"
   },
   "eslintConfig": {
     "extends": [
