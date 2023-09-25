@@ -4,6 +4,9 @@ import { SkillGem, SkillGemInfoRoot, SkillGemVariant } from '../Type/SkillGemInf
 export const POENinjaSkillGemAdapter = (root: SkillGemInfoRoot): Map<string, SkillGem> => {
   const map: Map<string, SkillGem> = new Map<string, SkillGem>()
   for (const info of root.lines) {
+    if (info.name === 'Phantasmal Fireball') console.log('info', info)
+    if (info.sparkline.totalChange !== info.lowConfidenceSparkline.totalChange) continue
+    if (info.listingCount < 6) continue
     let isVaalSkill = false
     let baseType: string = info.baseType
     const baseTypeSplit = baseType.split(' ')

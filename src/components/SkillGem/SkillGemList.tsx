@@ -9,7 +9,6 @@ interface SkillGemVariantInfo extends SkillGemVariant {
   base: SkillGem
 }
 const SkillGemList: React.FC<SkillGemListProps> = ({ skillGem }) => {
-  console.log('SkillGemList Table')
   const Table = CustomTableFactory<SkillGemVariantInfo>()
   const [listedProperty, SetListedProperty] = useState<Map<string, ListedProperty<SkillGemVariantInfo>>>()
   const [skillGemVariantInfo, SetSkillGemVariantInfo] = useState<SkillGemVariantInfo[]>()
@@ -27,13 +26,13 @@ const SkillGemList: React.FC<SkillGemListProps> = ({ skillGem }) => {
         GetPropertyValue: (data) => (data.level),
         GetComparer: (dataA, dataB) => (dataB.level - dataA.level)
       } as ListedProperty<SkillGemVariantInfo>],
-      ['Corrupted', {
-        GetPropertyValue: (data) => (data.corrupted.toString()),
-        GetComparer: (dataA, dataB) => (Number(dataB.corrupted) - Number(dataA.corrupted))
-      } as ListedProperty<SkillGemVariantInfo>],
       ['Quality', {
         GetPropertyValue: (data) => (data.quality),
         GetComparer: (dataA, dataB) => (dataB.quality - dataA.quality)
+      } as ListedProperty<SkillGemVariantInfo>],
+      ['Corrupted', {
+        GetPropertyValue: (data) => (data.corrupted.toString()),
+        GetComparer: (dataA, dataB) => (Number(dataB.corrupted) - Number(dataA.corrupted))
       } as ListedProperty<SkillGemVariantInfo>],
       ['Quality Type', {
         GetPropertyValue: (data) => (data.qualityType),

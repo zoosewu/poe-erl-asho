@@ -1,6 +1,6 @@
-import { CalculatedData, CalculatedDetail } from '../../Type/CalculateType'
+import { CalculateType, CalculatedData, CalculatedDetail } from '../../Type/CalculateType'
 import { SkillGem, SkillGemVariant } from '../../Type/SkillGemInfoType'
-import { SkillQuality } from '../../Type/SkillQualityType'
+import { SkillQuality, SkillQualityDetail } from '../../Type/SkillQualityType'
 import { GetSkillQuality } from '../SkillQuality/SkillQualityGetter'
 import { ZoosewuProps } from './Zoosewu'
 const isLevelChangeCorrupted = (variantOriginal: SkillGemVariant, variantTarget: SkillGemVariant): boolean => {
@@ -30,11 +30,12 @@ const isToVaalCorrupted = (variantOriginal: SkillGemVariant, variantTarget: Skil
   return true
 }
 const CalculateVaalOrb = (currentVariant: SkillGemVariant, baseGem: SkillGem, calculatedData: CalculatedData, props: ZoosewuProps) => {
-  const calculatedDetails: CalculatedDetail[] = []
+  const data: CalculateType = calculatedData.vaal
   const totalWeight: number = 8
   for (const targetVariant of baseGem.variant) {
     let variantWeight = 0
     if (!targetVariant.corrupted) continue
+    if (currentVariant.qualityType !== targetVariant.qualityType) continue
     if (isLevelChangeCorrupted(currentVariant, targetVariant)) variantWeight = 1
     else if (isQualityChangeCorrupted(currentVariant, targetVariant)) variantWeight = 1
     else if (isSameGemCorrupted(currentVariant, targetVariant)) variantWeight = 2
@@ -49,10 +50,59 @@ const CalculateVaalOrb = (currentVariant: SkillGemVariant, baseGem: SkillGem, ca
       weight: variantWeight,
       price: targetVariant.chaosValue
     }
-    calculatedData.vaalIncome += newCalculateDetail.price * newCalculateDetail.weight / totalWeight
-    calculatedDetails.push(newCalculateDetail)
+    data.revenues += newCalculateDetail.price * newCalculateDetail.weight / totalWeight
+    data.details.push(newCalculateDetail)
   }
-  calculatedData.details = calculatedData.details.concat(calculatedDetails)
+  const totalExpenses = data.expenses + calculatedData.gemExpenses
+  data.income = (data.revenues - totalExpenses) / totalExpenses
+}
+const GetTargetQualityTypeGem = (details: CalculatedDetail[], qualityType: number): CalculatedDetail | null => {
+  let targetGem: CalculatedDetail = {
+    name: '',
+    level: 0,
+    quality: 0,
+    corrupted: false,
+    qualityType: qualityType,
+    weight: 0,
+    price: 0
+  }
+  for (const detail of details) {
+    if (detail.qualityType === qualityType && detail.price > targetGem.price) targetGem = detail
+  }
+  if (targetGem.name !== '') return targetGem
+  return null
+}
+const CalculateLens = (currentVariant: SkillGemVariant, baseGem: SkillGem, calculatedData: CalculatedData, props: ZoosewuProps) => {
+  const data: CalculateType = calculatedData.lens
+  const qualityInfos = props.skillQuality.get(baseGem.name)!
+  let totalWeight: number = 0
+  for (const info of qualityInfos.qualityDetails) {
+    totalWeight += info.weight
+  }
+  for (const qualityDetail of qualityInfos.qualityDetails) {
+    if (qualityDetail.qualityType === currentVariant.qualityType) continue
+    for (const otherVariant of baseGem.variant) {
+      if (qualityDetail.qualityType !== otherVariant.qualityType) continue
+      if (otherVariant.isVaalSkill) continue
+      if (otherVariant.corrupted) continue
+      const newCalculateDetail: CalculatedDetail = {
+        name: otherVariant.name,
+        level: otherVariant.level,
+        quality: otherVariant.quality,
+        corrupted: otherVariant.corrupted,
+        qualityType: qualityDetail.qualityType,
+        weight: qualityDetail.weight,
+        price: otherVariant.chaosValue
+      }
+      data.details.push(newCalculateDetail)
+    }
+  }
+  for (let index = 1; index < 5; index++) {
+    const targetGem = GetTargetQualityTypeGem(data.details, index)
+    if (targetGem !== null) data.revenues += targetGem.price * targetGem.weight / totalWeight
+  }
+  const totalExpenses = data.expenses + calculatedData.gemExpenses
+  data.income = (data.revenues - totalExpenses) / totalExpenses
 }
 export const ZoosewuCalculate = async (props: ZoosewuProps): Promise<CalculatedData[]> => {
   const { currency, skillGem, skillQuality, SetSkillQuality } = props
@@ -64,15 +114,17 @@ export const ZoosewuCalculate = async (props: ZoosewuProps): Promise<CalculatedD
     if (item.name === 'Prime Regrading Lens') primeRegradingLens = item.chaosEquivalent
     else if (item.name === 'Secondary Regrading Lens') secondaryRegradingLens = item.chaosEquivalent
   }
-  const fetchGems: string[] = []
-  for (const [, gem] of skillGem) {
-    if (skillQuality.has(gem.name)) continue
-    fetchGems.push(gem.name)
-  }
-  if (fetchGems.length > 0) {
-    const newSkillQualityMap = await GetSkillQuality(fetchGems)
+  console.log('primeRegradingLens', primeRegradingLens, 'secondaryRegradingLens', secondaryRegradingLens)
+  // const fetchGems: string[] = []
+  // for (const [, gem] of skillGem) {
+  //   if (skillQuality.has(gem.name)) continue
+  //   fetchGems.push(gem.name)
+  // }
+  // if (fetchGems.length > 0) {
+  if (!skillQuality || skillQuality.size === 0) {
+    const newSkillQualityMap = await GetSkillQuality()
     if (newSkillQualityMap.size > 0) {
-      console.log('fetchGems', fetchGems, newSkillQualityMap)
+      console.log('fetchGems', newSkillQualityMap)
       newMap = new Map([...skillQuality].concat([...newSkillQualityMap]))
       isGetSkillQuality = true
     }
@@ -81,64 +133,41 @@ export const ZoosewuCalculate = async (props: ZoosewuProps): Promise<CalculatedD
     const qualityInfo = skillQuality.get(gem.name)!
     for (const variant of gem.variant) {
       if (variant.corrupted) continue
+      let qualityType: SkillQualityDetail | undefined = undefined
+      if (!qualityInfo) console.log('qualityInfo.tags error', gem.name, qualityInfo)
+      else {
+        for (const detail of qualityInfo.qualityDetails) {
+          if (detail.qualityType === variant.qualityType) {
+            qualityType = detail
+            break
+          }
+        }
+      }
       const calculatedData: CalculatedData = {
         icon: variant.isVaalSkill ? gem.vaalIcon : gem.icon,
         name: variant.name,
+        statText: qualityType ? qualityType.statText : '',
         baseType: gem.name,
         level: variant.level,
         quality: variant.quality,
-        gemCost: variant.chaosValue,
-        lensCost: 0,
-        lensIncome: 0,
-        vaalIncome: 0,
-        doubleVaalIncome: 0,
-        earningsYield: 0,
-        details: []
+        gemExpenses: variant.chaosValue,
+        lens: { expenses: 0, revenues: 0, income: 0, details: [] } as CalculateType,
+        vaal: { expenses: 0, revenues: 0, income: 0, details: [] } as CalculateType,
+        doubleCorrupted: { expenses: 0, revenues: 0, income: 0, details: [] } as CalculateType
       }
       newCalculatedData.push(calculatedData)
       if (!variant.name.includes('Awakened') && skillQuality.has(gem.name)) {
-        if (!qualityInfo.tags) console.log('qualityInfo.tags error', qualityInfo.name)
-        if (qualityInfo.tags.includes('Spell') || qualityInfo.tags.includes('Attack') || qualityInfo.tags.includes('Warcry')) calculatedData.lensCost = primeRegradingLens
-        else if (qualityInfo.tags.includes('Support')) calculatedData.lensCost = secondaryRegradingLens
+        if (!qualityInfo.tags) console.log('qualityInfo.tags error', gem.name, qualityInfo)
+        if (qualityInfo.tags.includes('Support')) calculatedData.lens.expenses = secondaryRegradingLens
+        else if (qualityInfo.tags.includes('Spell') || qualityInfo.tags.includes('Attack') || qualityInfo.tags.includes('Warcry')) calculatedData.lens.expenses = primeRegradingLens
         else console.log('gem type error', variant.name, qualityInfo.tags)
         CalculateLens(variant, gem, calculatedData, props)
       }
       CalculateVaalOrb(variant, gem, calculatedData, props)
-      const vaalEarn = (calculatedData.vaalIncome - calculatedData.gemCost) / calculatedData.gemCost
-      const lensEarn = (calculatedData.lensIncome - calculatedData.gemCost - calculatedData.lensCost) / (calculatedData.gemCost + calculatedData.lensCost)
-      calculatedData.earningsYield = vaalEarn > lensEarn ? vaalEarn : lensEarn
     }
   }
   if (isGetSkillQuality) SetSkillQuality(newMap)
   return newCalculatedData
 }
 
-const CalculateLens = (currentVariant: SkillGemVariant, baseGem: SkillGem, calculatedData: CalculatedData, props: ZoosewuProps) => {
-  const calculatedDetails: CalculatedDetail[] = []
-  const qualityInfos = props.skillQuality.get(baseGem.name)!
-  let totalWeight: number = 0
-  for (const qualityDetail of qualityInfos.qualityDetails) {
-    if (qualityDetail.qualityType === currentVariant.qualityType) continue
-    for (const otherVariant of baseGem.variant) {
-      if (qualityDetail.qualityType !== otherVariant.qualityType) continue
-      if (currentVariant.level !== otherVariant.level) continue
-      if (currentVariant.quality !== otherVariant.quality) continue
-      if (otherVariant.corrupted) continue
-      const newCalculateDetail: CalculatedDetail = {
-        name: otherVariant.name,
-        level: otherVariant.level,
-        quality: otherVariant.quality,
-        corrupted: otherVariant.corrupted,
-        qualityType: qualityDetail.qualityType,
-        weight: qualityDetail.weight,
-        price: otherVariant.chaosValue
-      }
-      totalWeight += qualityDetail.weight
-      calculatedDetails.push(newCalculateDetail)
-    }
-  }
-  for (const detail of calculatedDetails) {
-    calculatedData.lensIncome += detail.price * detail.weight / totalWeight
-  }
-  calculatedData.details = calculatedData.details.concat(calculatedDetails)
-}
+

@@ -21,12 +21,8 @@ const Zoosewu: React.FC<ZoosewuProps> = (props) => {
   const [listedProperty, SetListedProperty] = useState<Map<string, ListedProperty<CalculatedData>>>()
   useEffect(() => {
     SetListedProperty(new Map<string, ListedProperty<CalculatedData>>([
-      ['Icon', {
-        GetPropertyValue: (data) => (data.icon),
-        GetComparer: (dataA, dataB) => (dataB.name.localeCompare(dataA.name))
-      } as ListedProperty<CalculatedData>],
       ['Name', {
-        GetPropertyValue: (data) => (data.name),
+        GetPropertyValue: (data) => (<>{data.icon}{'\n' + data.name + (data.statText === '' ? '' : '\n' + data.statText)}</>),
         GetComparer: (dataA, dataB) => (dataB.name.localeCompare(dataA.name))
       } as ListedProperty<CalculatedData>],
       ['Level', {
@@ -37,30 +33,33 @@ const Zoosewu: React.FC<ZoosewuProps> = (props) => {
         GetPropertyValue: (data) => (data.quality),
         GetComparer: (dataA, dataB) => (dataB.quality - dataA.quality)
       } as ListedProperty<CalculatedData>],
-      ['Cost', {
-        GetPropertyValue: (data) => (data.gemCost),
-        GetComparer: (dataA, dataB) => (dataB.gemCost - dataA.gemCost)
+      ['Expenses', {
+        GetPropertyValue: (data) => (data.gemExpenses.toFixed(2)),
+        GetComparer: (dataA, dataB) => (dataB.gemExpenses - dataA.gemExpenses)
       } as ListedProperty<CalculatedData>],
-      ['Lens Income', {
-        GetPropertyValue: (data) => (data.lensIncome),
-        GetComparer: (dataA, dataB) => (dataB.lensIncome - dataA.lensIncome)
+      ['VaalIncome', {
+        GetPropertyValue: (data) => {
+          const calculatedType = data.vaal
+          let detailInfo = ''
+          for (const detail of calculatedType.details) {
+            detailInfo += `\n${detail.name}(${detail.level}/${detail.quality}${detail.corrupted ? 'c' : ''}), price:${detail.price.toFixed(2)}, weight:${detail.weight.toFixed(2)}`
+          }
+          return `expenses:${calculatedType.expenses.toFixed(2)} revenues:${calculatedType.revenues.toFixed(2)} income:${calculatedType.income.toFixed(2)} detail count:${calculatedType.details.length}` + detailInfo
+        },
+        GetComparer: (dataA, dataB) => (dataB.vaal.income - dataA.vaal.income)
       } as ListedProperty<CalculatedData>],
-      ['Vaal Income', {
-        GetPropertyValue: (data) => (data.vaalIncome),
-        GetComparer: (dataA, dataB) => (dataB.vaalIncome - dataA.vaalIncome)
+      ['LensIncome', {
+        GetPropertyValue: (data) => {
+          const calculatedType = data.lens
+          let detailInfo = ''
+          for (const detail of calculatedType.details) {
+            detailInfo += `\n${detail.name}(${detail.level}/${detail.quality}${detail.corrupted ? 'c' : ''}), price:${detail.price.toFixed(2)}, weight:${detail.weight.toFixed(2)}`
+          }
+          return `expenses:${calculatedType.expenses.toFixed(2)} revenues:${calculatedType.revenues.toFixed(2)} income:${calculatedType.income.toFixed(2)} detail count:${calculatedType.details.length}` + detailInfo
+        },
+        GetComparer: (dataA, dataB) => (dataB.lens.income - dataA.lens.income)
       } as ListedProperty<CalculatedData>],
-      ['EarningsYield', {
-        GetPropertyValue: (data) => (data.earningsYield),
-        GetComparer: (dataA, dataB) => (dataB.earningsYield - dataA.earningsYield)
-      } as ListedProperty<CalculatedData>],
-      ['BaseType', {
-        GetPropertyValue: (data) => (data.baseType),
-        GetComparer: (dataA, dataB) => (dataB.baseType.localeCompare(dataA.baseType))
-      } as ListedProperty<CalculatedData>],
-      ['Detail Count', {
-        GetPropertyValue: (data) => (data.details.length),
-        GetComparer: (dataA, dataB) => (dataB.details.length - dataA.details.length)
-      } as ListedProperty<CalculatedData>]]))
+    ]))
   }, [])
   useEffect(() => {
     const fetchData = async () => {

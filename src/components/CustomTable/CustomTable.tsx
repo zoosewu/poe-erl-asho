@@ -37,7 +37,7 @@ export const CustomTableFactory = <P extends any>() => {
     }, [listedProperty, sortBy, data])
     useEffect(() => {
       if (searchedValue === '' || (sortedData == null) || (listedProperty == null)) {
-        console.log('searchedValue', sortedData)
+        if (sortedData !== undefined && sortedData.length > 0) console.log('searchedValue', sortedData)
         SetSearchedData(sortedData)
         return
       }
@@ -58,7 +58,7 @@ export const CustomTableFactory = <P extends any>() => {
           }
         }
       }
-      console.log('searchedValue', newSearchedData)
+      if (newSearchedData !== undefined && newSearchedData.length > 0) console.log('searchedValue', newSearchedData)
       SetSearchedData(newSearchedData)
     }, [listedProperty, sortedData, searchedValue])
 
@@ -105,7 +105,7 @@ export const CustomTableFactory = <P extends any>() => {
           <thead>
             <tr>
               {[...listedProperty!.keys()].map((key, index) => (
-                <th key={key} colSpan={index === 1 ? 2 : 1} onClick={() => sort(key)}>{key}{renderCaret(key)}</th>
+                <th key={key} onClick={() => sort(key)}>{key}{renderCaret(key)}</th>
               ))}
             </tr>
           </thead>
@@ -114,7 +114,7 @@ export const CustomTableFactory = <P extends any>() => {
             {[...searchedData].splice((currentPage - 1) * listAmount, listAmount).map((d, index) => (
               <tr key={index}>
                 {[...listedProperty!.values()].map((value, i) => (
-                  <td key={i} className='align-middle text-center' colSpan={i === 1 ? 2 : 1}>{value.GetPropertyValue(d)}</td>
+                  <td key={i} className='align-middle text-center text-pre' >{value.GetPropertyValue(d)}</td>
                 ))}
               </tr>
             ))}
