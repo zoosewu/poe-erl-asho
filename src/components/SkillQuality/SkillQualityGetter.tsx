@@ -2,8 +2,8 @@ import { SkillQualityInfoRoot, SkillQuality, SkillQualityDetail, SkillQualityInf
 import mockDataSkillQuality from '../../test/mockDataSkillQuality.json'
 export async function GetSkillQuality(): Promise<Map<string, SkillQuality>> {
   let skillQualityInfoCargoquery: SkillQualityInfoCargoquery[] = []
-  // if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-  if (false) {
+  if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+  // if (false) {
     skillQualityInfoCargoquery = mockDataSkillQuality.cargoquery
   } else {
     const countUrl = GetPOEWikiQualityInfoCountUrl()

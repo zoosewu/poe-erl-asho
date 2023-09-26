@@ -30,8 +30,8 @@ const App: React.FC<AppProps> = ({ SetSkillGem, SetCurrency, SetCurrencyDetails 
       let skillGemJson: SkillGemInfoRoot
       let currencyJson: CurrencyInfoRoot
 
-      // if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-      if (false) {
+      if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+      // if (false) {
         leagueName = mockDataLeagueInfo.cargoquery[0].title['short name']
         skillGemJson = mockDataSkillGem
         currencyJson = mockDataCurrency
