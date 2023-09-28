@@ -7,67 +7,63 @@ import { SkillQuality } from '../../Type/SkillQualityType'
 import { SetSkillQuality } from '../../redux/actions'
 import { CalculatedData } from '../../Type/CalculateType'
 import { ZoosewuCalculate } from './ZoosewuCalculate'
+import { useNavigate } from 'react-router-dom'
+
+const listedProperty = new Map<string, ListedProperty<CalculatedData>>([
+  ['Name', {
+    GetPropertyValue: (data) => (<>{data.icon}{'\n' + data.name + (data.statText === '' ? '' : '\n' + data.statText)}</>),
+    GetComparer: (dataA, dataB) => (dataB.name.localeCompare(dataA.name))
+  } as ListedProperty<CalculatedData>],
+  ['Level', {
+    GetPropertyValue: (data) => (data.level),
+    GetComparer: (dataA, dataB) => (dataB.level - dataA.level)
+  } as ListedProperty<CalculatedData>],
+  ['Quality', {
+    GetPropertyValue: (data) => (data.quality),
+    GetComparer: (dataA, dataB) => (dataB.quality - dataA.quality)
+  } as ListedProperty<CalculatedData>],
+  ['Expenses', {
+    GetPropertyValue: (data) => (data.gemExpenses.toFixed(2)),
+    GetComparer: (dataA, dataB) => (dataB.gemExpenses - dataA.gemExpenses)
+  } as ListedProperty<CalculatedData>],
+  ['VaalIncome', {
+    GetPropertyValue: (data) => {
+      const calculatedType = data.vaal
+      let detailInfo = ''
+      for (const detail of calculatedType.details) {
+        detailInfo += `\n${detail.name}(${detail.level}/${detail.quality}${detail.corrupted ? 'c' : ''}), price:${detail.price.toFixed(2)}, weight:${detail.weight.toFixed(2)}`
+      }
+      return `expenses:${calculatedType.expenses.toFixed(2)} revenues:${calculatedType.revenues.toFixed(2)} income:${calculatedType.income.toFixed(2)} detail count:${calculatedType.details.length}` + detailInfo
+    },
+    GetComparer: (dataA, dataB) => (dataB.vaal.income - dataA.vaal.income)
+  } as ListedProperty<CalculatedData>],
+  ['LensIncome', {
+    GetPropertyValue: (data) => {
+      const calculatedType = data.lens
+      let detailInfo = ''
+      for (const detail of calculatedType.details) {
+        detailInfo += `\n${detail.name}(${detail.level}/${detail.quality}${detail.corrupted ? 'c' : ''}), price:${detail.price.toFixed(2)}, weight:${detail.weight.toFixed(2)}`
+      }
+      return `expenses:${calculatedType.expenses.toFixed(2)} revenues:${calculatedType.revenues.toFixed(2)} income:${calculatedType.income.toFixed(2)} detail count:${calculatedType.details.length}` + detailInfo
+    },
+    GetComparer: (dataA, dataB) => (dataB.lens.income - dataA.lens.income)
+  } as ListedProperty<CalculatedData>],
+])
 export interface ZoosewuProps {
   currency: Currency[]
   skillGem: Map<string, SkillGem>
   skillQuality: Map<string, SkillQuality>
-  SetSkillQuality: typeof SetSkillQuality
 }
 
 const Zoosewu: React.FC<ZoosewuProps> = (props) => {
-  const { skillGem, SetSkillQuality } = props
+  const { skillGem } = props
   const [stateData, setStateData] = useState<CalculatedData[]>([])
   const Table = CustomTableFactory<CalculatedData>()
-  const [listedProperty, SetListedProperty] = useState<Map<string, ListedProperty<CalculatedData>>>()
   useEffect(() => {
-    SetListedProperty(new Map<string, ListedProperty<CalculatedData>>([
-      ['Name', {
-        GetPropertyValue: (data) => (<>{data.icon}{'\n' + data.name + (data.statText === '' ? '' : '\n' + data.statText)}</>),
-        GetComparer: (dataA, dataB) => (dataB.name.localeCompare(dataA.name))
-      } as ListedProperty<CalculatedData>],
-      ['Level', {
-        GetPropertyValue: (data) => (data.level),
-        GetComparer: (dataA, dataB) => (dataB.level - dataA.level)
-      } as ListedProperty<CalculatedData>],
-      ['Quality', {
-        GetPropertyValue: (data) => (data.quality),
-        GetComparer: (dataA, dataB) => (dataB.quality - dataA.quality)
-      } as ListedProperty<CalculatedData>],
-      ['Expenses', {
-        GetPropertyValue: (data) => (data.gemExpenses.toFixed(2)),
-        GetComparer: (dataA, dataB) => (dataB.gemExpenses - dataA.gemExpenses)
-      } as ListedProperty<CalculatedData>],
-      ['VaalIncome', {
-        GetPropertyValue: (data) => {
-          const calculatedType = data.vaal
-          let detailInfo = ''
-          for (const detail of calculatedType.details) {
-            detailInfo += `\n${detail.name}(${detail.level}/${detail.quality}${detail.corrupted ? 'c' : ''}), price:${detail.price.toFixed(2)}, weight:${detail.weight.toFixed(2)}`
-          }
-          return `expenses:${calculatedType.expenses.toFixed(2)} revenues:${calculatedType.revenues.toFixed(2)} income:${calculatedType.income.toFixed(2)} detail count:${calculatedType.details.length}` + detailInfo
-        },
-        GetComparer: (dataA, dataB) => (dataB.vaal.income - dataA.vaal.income)
-      } as ListedProperty<CalculatedData>],
-      ['LensIncome', {
-        GetPropertyValue: (data) => {
-          const calculatedType = data.lens
-          let detailInfo = ''
-          for (const detail of calculatedType.details) {
-            detailInfo += `\n${detail.name}(${detail.level}/${detail.quality}${detail.corrupted ? 'c' : ''}), price:${detail.price.toFixed(2)}, weight:${detail.weight.toFixed(2)}`
-          }
-          return `expenses:${calculatedType.expenses.toFixed(2)} revenues:${calculatedType.revenues.toFixed(2)} income:${calculatedType.income.toFixed(2)} detail count:${calculatedType.details.length}` + detailInfo
-        },
-        GetComparer: (dataA, dataB) => (dataB.lens.income - dataA.lens.income)
-      } as ListedProperty<CalculatedData>],
-    ]))
-  }, [])
-  useEffect(() => {
-    const fetchData = async () => {
-      const newCalculatedData: CalculatedData[] = await ZoosewuCalculate(props)
-      setStateData(newCalculatedData)
-    }
-    fetchData()
-  }, [props, skillGem, SetSkillQuality])
+    const newCalculatedData: CalculatedData[] = ZoosewuCalculate(props)
+    setStateData(newCalculatedData)
+  }, [props])
+  if (!stateData || stateData.length === 0) return (<div></div>)
   return (
     <>
       <Table data={stateData} listedProperty={listedProperty} />
@@ -79,4 +75,4 @@ const mapStateToProps = (state: { currency: Currency[], skillGem: Map<string, Sk
   skillGem: state.skillGem,
   skillQuality: state.skillQuality
 })
-export default connect(mapStateToProps, { SetSkillQuality })(Zoosewu)
+export default connect(mapStateToProps)(Zoosewu)

@@ -6,22 +6,27 @@ export async function GetSkillQuality(): Promise<Map<string, SkillQuality>> {
   // if (false) {
     skillQualityInfoCargoquery = mockDataSkillQuality.cargoquery
   } else {
-    const countUrl = GetPOEWikiQualityInfoCountUrl()
-    const countData = await fetch(countUrl, { method: 'GET' })
-    const countJson: SkillQualityInfoCountRoot = await countData.json()
-    const queryCount = parseInt(countJson.cargoquery[0].title.count)
-    console.log('GetSkillQuality Count', queryCount)
-    const fetchQuery: Array<Promise<Response>> = []
-    for (let index = 0; index < queryCount / 500; index++) {
-      const url = GetPOEWikiSkillQualityInfoUrl(index)
-      fetchQuery.push(fetch(url, { method: 'GET' }))
+    try {
+      const countUrl = GetPOEWikiQualityInfoCountUrl()
+      const countData = await fetch(countUrl, { method: 'GET' })
+      const countJson: SkillQualityInfoCountRoot = await countData.json()
+      const queryCount = parseInt(countJson.cargoquery[0].title.count)
+      console.log('GetSkillQuality Count', queryCount)
+      const fetchQuery: Array<Promise<Response>> = []
+      for (let index = 0; index < queryCount / 500; index++) {
+        const url = GetPOEWikiSkillQualityInfoUrl(index)
+        fetchQuery.push(fetch(url, { method: 'GET' }))
+      }
+      const responses: Response[] = await Promise.all(fetchQuery)
+      for (const response of responses) {
+        const jsonData: SkillQualityInfoRoot = await response.json()
+        console.log('GetSkillQuality data', jsonData)
+        skillQualityInfoCargoquery = skillQualityInfoCargoquery.concat(jsonData.cargoquery)
+      }
+    } catch (error) {
+      throw error
     }
-    const responses: Response[] = await Promise.all(fetchQuery)
-    for (const response of responses) {
-      const jsonData: SkillQualityInfoRoot = await response.json()
-      console.log('GetSkillQuality data', jsonData)
-      skillQualityInfoCargoquery = skillQualityInfoCargoquery.concat(jsonData.cargoquery)
-    }
+
   }
   const result: Map<string, SkillQuality> = new Map<string, SkillQuality>()
   for (let index = 0; index < skillQualityInfoCargoquery.length; index++) {

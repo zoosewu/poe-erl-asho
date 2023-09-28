@@ -29,7 +29,7 @@ const isToVaalCorrupted = (variantOriginal: SkillGemVariant, variantTarget: Skil
   if (variantOriginal.quality !== variantTarget.quality) return false
   return true
 }
-const CalculateVaalOrb = (currentVariant: SkillGemVariant, baseGem: SkillGem, calculatedData: CalculatedData, props: ZoosewuProps) => {
+const CalculateVaalOrb = (currentVariant: SkillGemVariant, baseGem: SkillGem, calculatedData: CalculatedData) => {
   const data: CalculateType = calculatedData.vaal
   const totalWeight: number = 8
   for (const targetVariant of baseGem.variant) {
@@ -74,12 +74,12 @@ const GetTargetQualityTypeGem = (details: CalculatedDetail[], qualityType: numbe
 }
 const CalculateLens = (currentVariant: SkillGemVariant, baseGem: SkillGem, calculatedData: CalculatedData, props: ZoosewuProps) => {
   const data: CalculateType = calculatedData.lens
-  const qualityInfos = props.skillQuality.get(baseGem.name)!
+  const qualityInfo = props.skillQuality.get(baseGem.name)!
   let totalWeight: number = 0
-  for (const info of qualityInfos.qualityDetails) {
+  for (const info of qualityInfo.qualityDetails) {
     totalWeight += info.weight
   }
-  for (const qualityDetail of qualityInfos.qualityDetails) {
+  for (const qualityDetail of qualityInfo.qualityDetails) {
     if (qualityDetail.qualityType === currentVariant.qualityType) continue
     for (const otherVariant of baseGem.variant) {
       if (qualityDetail.qualityType !== otherVariant.qualityType) continue
@@ -104,10 +104,8 @@ const CalculateLens = (currentVariant: SkillGemVariant, baseGem: SkillGem, calcu
   const totalExpenses = data.expenses + calculatedData.gemExpenses
   data.income = (data.revenues - totalExpenses) / totalExpenses
 }
-export const ZoosewuCalculate = async (props: ZoosewuProps): Promise<CalculatedData[]> => {
-  const { currency, skillGem, skillQuality, SetSkillQuality } = props
-  let newMap: Map<string, SkillQuality> = skillQuality
-  let isGetSkillQuality = false
+export const ZoosewuCalculate = (props: ZoosewuProps): CalculatedData[] => {
+  const { currency, skillGem, skillQuality } = props
   const newCalculatedData: CalculatedData[] = []
   let primeRegradingLens: number = 0; let secondaryRegradingLens: number = 0
   for (const item of currency) {
@@ -115,20 +113,7 @@ export const ZoosewuCalculate = async (props: ZoosewuProps): Promise<CalculatedD
     else if (item.name === 'Secondary Regrading Lens') secondaryRegradingLens = item.chaosEquivalent
   }
   console.log('primeRegradingLens', primeRegradingLens, 'secondaryRegradingLens', secondaryRegradingLens)
-  // const fetchGems: string[] = []
-  // for (const [, gem] of skillGem) {
-  //   if (skillQuality.has(gem.name)) continue
-  //   fetchGems.push(gem.name)
-  // }
-  // if (fetchGems.length > 0) {
-  if (!skillQuality || skillQuality.size === 0) {
-    const newSkillQualityMap = await GetSkillQuality()
-    if (newSkillQualityMap.size > 0) {
-      console.log('fetchGems', newSkillQualityMap)
-      newMap = new Map([...skillQuality].concat([...newSkillQualityMap]))
-      isGetSkillQuality = true
-    }
-  }
+
   for (const [, gem] of skillGem) {
     const qualityInfo = skillQuality.get(gem.name)!
     for (const variant of gem.variant) {
@@ -163,10 +148,9 @@ export const ZoosewuCalculate = async (props: ZoosewuProps): Promise<CalculatedD
         else console.log('gem type error', variant.name, qualityInfo.tags)
         CalculateLens(variant, gem, calculatedData, props)
       }
-      CalculateVaalOrb(variant, gem, calculatedData, props)
+      CalculateVaalOrb(variant, gem, calculatedData)
     }
   }
-  if (isGetSkillQuality) SetSkillQuality(newMap)
   return newCalculatedData
 }
 

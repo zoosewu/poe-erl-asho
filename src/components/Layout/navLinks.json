@@ -1,7 +1,7 @@
 [
   {
     "label": "寶石價格",
-    "href": "home"
+    "href": "skill-gem"
   },
   {
     "label": "通貨價格",
@@ -9,10 +9,10 @@
   },
   {
     "label": "寶石品質",
-    "href": "skillQuality"
+    "href": "skill-quality"
   }  ,
   {
     "label": "計算",
-    "href": "zoosewu"
+    "href": "calculate"
   }
 ]
