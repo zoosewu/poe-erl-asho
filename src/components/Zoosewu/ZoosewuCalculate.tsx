@@ -113,13 +113,12 @@ export const ZoosewuCalculate = (props: ZoosewuProps): CalculatedData[] => {
     else if (item.name === 'Secondary Regrading Lens') secondaryRegradingLens = item.chaosEquivalent
   }
   console.log('primeRegradingLens', primeRegradingLens, 'secondaryRegradingLens', secondaryRegradingLens)
-
   for (const [, gem] of skillGem) {
     const qualityInfo = skillQuality.get(gem.name)!
     for (const variant of gem.variant) {
       if (variant.corrupted) continue
       let qualityType: SkillQualityDetail | undefined = undefined
-      if (!qualityInfo) console.log('qualityInfo.tags error', gem.name, qualityInfo)
+      if (!qualityInfo) console.log('qualityInfo.tags error', gem.name, qualityInfo, skillQuality)
       else {
         for (const detail of qualityInfo.qualityDetails) {
           if (detail.qualityType === variant.qualityType) {

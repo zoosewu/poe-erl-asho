@@ -40,7 +40,7 @@ function GetPOEWikiSkillQualityInfoUrl(offsetIndex: number | undefined) {
     'limit=500&' +
     'format=json' + offset
 }
-export async function GetSkillQuality(skillQualityInfoCargoquery: SkillQualityInfoCargoquery[]): Promise<Map<string, SkillQuality>> {
+export function POEWikiSkillQualityAdapter(skillQualityInfoCargoquery: SkillQualityInfoCargoquery[]): Map<string, SkillQuality> {
   const result: Map<string, SkillQuality> = new Map<string, SkillQuality>()
   for (let index = 0; index < skillQualityInfoCargoquery.length; index++) {
     const element = skillQualityInfoCargoquery[index].title
@@ -48,7 +48,7 @@ export async function GetSkillQuality(skillQualityInfoCargoquery: SkillQualityIn
     const skillQualityDetail: SkillQualityDetail = {
       qualityType: parseInt(element['set id']),
       weight: parseInt(element.weight),
-      statText: element['stat text']
+      statText: element['stat text'].replace('&lt;br&gt;', '\n')
     } as SkillQualityDetail
     if (result.has(element.name)) {
       skillQuality = result.get(element.name) as SkillQuality

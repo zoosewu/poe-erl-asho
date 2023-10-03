@@ -7,6 +7,8 @@ export interface ListedProperty<P> {
   propertyName: string
   GetPropertyValue: (data: P) => any
   GetComparer: (dataA: P, dataB: P) => number
+  colSpan?: number
+  title?: (data: P) => string
 }
 interface CustomTableProps<P> {
   data: P[] | undefined
@@ -105,7 +107,7 @@ export const CustomTableFactory = <P extends any>() => {
           <thead>
             <tr>
               {[...listedProperty!.keys()].map((key, index) => (
-                <th key={key} onClick={() => sort(key)}>{key}{renderCaret(key)}</th>
+                <th key={key} colSpan={listedProperty?.get(key)?.colSpan ?? 1} onClick={() => sort(key)}>{key}{renderCaret(key)}</th>
               ))}
             </tr>
           </thead>
@@ -114,7 +116,7 @@ export const CustomTableFactory = <P extends any>() => {
             {[...searchedData].splice((currentPage - 1) * listAmount, listAmount).map((d, index) => (
               <tr key={index}>
                 {[...listedProperty!.values()].map((value, i) => (
-                  <td key={i} className='align-middle text-center text-pre' >{value.GetPropertyValue(d)}</td>
+                  <td key={i} colSpan={value.colSpan ?? 1} title={value.title?.(d)} className='align-middle text-center text-pre' >{value.GetPropertyValue(d)}</td>
                 ))}
               </tr>
             ))}

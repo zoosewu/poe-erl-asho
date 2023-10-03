@@ -6,10 +6,11 @@ import Layout from './components/Layout/layout'
 import { Route, RouterProvider, createHashRouter } from 'react-router-dom'
 import NoMatch from './components/Layout/NoMatch'
 import { connect } from 'react-redux'
-import { SetSkillGem, SetCurrency, SetCurrencyDetails } from './redux/actions'
+import { SetSkillGem, SetCurrency, SetCurrencyDetails, SetSkillQuality } from './redux/actions'
 import mockDataSkillGem from './test/mockDataSkillGem.json'
 import mockDataCurrency from './test/mockDataCurrency.json'
 import mockDataLeagueInfo from './test/mockDataLeagueInfo.json'
+import mockDataSkillQuality from './test/mockDataSkillQuality.json'
 import { CurrencyInfoRoot } from './Type/CurrencyInfoType'
 import { LeagueInfoRoot } from './Type/LeagueInfoType'
 import Zoosewu from './components/Zoosewu/Zoosewu'
@@ -19,11 +20,12 @@ import { POENinjaCurrencyAdapter } from './Adapter/POENinjaCurrencyAdapter'
 import SkillQualityList from './components/SkillQuality/SkillQualityList'
 import FetchError from './components/Layout/FetchError'
 import { SkillQualityInfoCargoquery, SkillQualityInfoCountRoot, SkillQualityInfoRoot } from './Type/SkillQualityType'
-import { FetchAllSkillQuality, FetchAllSkillQualityCount } from './Adapter/POEWikiSkillQualityAdapter'
+import { FetchAllSkillQuality, FetchAllSkillQualityCount, POEWikiSkillQualityAdapter } from './Adapter/POEWikiSkillQualityAdapter'
 interface AppProps {
   SetSkillGem: typeof SetSkillGem
   SetCurrency: typeof SetCurrency
   SetCurrencyDetails: typeof SetCurrencyDetails
+  SetSkillQuality: typeof SetSkillQuality
 }
 const router = createHashRouter([
   {
@@ -40,18 +42,20 @@ const router = createHashRouter([
     ],
   },
 ])
-const App: React.FC<AppProps> = ({ SetSkillGem, SetCurrency, SetCurrencyDetails }) => {
+const App: React.FC<AppProps> = ({ SetSkillGem, SetCurrency, SetCurrencyDetails, SetSkillQuality }) => {
   useEffect(() => {
     const FetchAPI = async () => {
       let leagueName: string
       let skillGemJson: SkillGemInfoRoot
       let currencyJson: CurrencyInfoRoot
+      let skillQualityInfoCargoquery: SkillQualityInfoCargoquery[] = []
 
       // if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
       if (false) {
         leagueName = mockDataLeagueInfo.cargoquery[0].title['short name']
         skillGemJson = mockDataSkillGem
         currencyJson = mockDataCurrency
+        skillQualityInfoCargoquery = mockDataSkillQuality.cargoquery
       } else {
         try {
           const [leagueData, countData] = await Promise.all([
@@ -73,7 +77,6 @@ const App: React.FC<AppProps> = ({ SetSkillGem, SetCurrency, SetCurrencyDetails 
           ])
           skillGemJson = await skillGem.json()
           currencyJson = await currency.json()
-          let skillQualityInfoCargoquery: SkillQualityInfoCargoquery[] = []
           for (const response of skillQualityResponses) {
             const jsonData: SkillQualityInfoRoot = await response.json()
             skillQualityInfoCargoquery = skillQualityInfoCargoquery.concat(jsonData.cargoquery)
@@ -94,6 +97,9 @@ const App: React.FC<AppProps> = ({ SetSkillGem, SetCurrency, SetCurrencyDetails 
       SetSkillGem(skillGemMap)
       SetCurrency(currencies)
       SetCurrencyDetails(currencyDetails)
+
+      const skillQualityMap = POEWikiSkillQualityAdapter(skillQualityInfoCargoquery)
+      SetSkillQuality(skillQualityMap)
     }
     FetchAPI()
   })
@@ -123,4 +129,4 @@ const App: React.FC<AppProps> = ({ SetSkillGem, SetCurrency, SetCurrencyDetails 
     </div>
   )
 }
-export default connect(null, { SetSkillGem, SetCurrency, SetCurrencyDetails })(App)
+export default connect(null, { SetSkillGem, SetCurrency, SetCurrencyDetails, SetSkillQuality })(App)

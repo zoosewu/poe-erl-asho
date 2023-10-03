@@ -10,9 +10,14 @@ import { ZoosewuCalculate } from './ZoosewuCalculate'
 import { useNavigate } from 'react-router-dom'
 
 const listedProperty = new Map<string, ListedProperty<CalculatedData>>([
-  ['Name', {
-    GetPropertyValue: (data) => (<>{data.icon}{'\n' + data.name + (data.statText === '' ? '' : '\n' + data.statText)}</>),
+  ['Icon', {
+    GetPropertyValue: (data) => (data.icon),
     GetComparer: (dataA, dataB) => (dataB.name.localeCompare(dataA.name))
+  } as ListedProperty<CalculatedData>],
+  ['Name', {
+    GetPropertyValue: (data) => (data.name),
+    GetComparer: (dataA, dataB) => (dataB.name.localeCompare(dataA.name)),
+    title: (data) => data.statText,
   } as ListedProperty<CalculatedData>],
   ['Level', {
     GetPropertyValue: (data) => (data.level),
@@ -33,9 +38,10 @@ const listedProperty = new Map<string, ListedProperty<CalculatedData>>([
       for (const detail of calculatedType.details) {
         detailInfo += `\n${detail.name}(${detail.level}/${detail.quality}${detail.corrupted ? 'c' : ''}), price:${detail.price.toFixed(2)}, weight:${detail.weight.toFixed(2)}`
       }
-      return `expenses:${calculatedType.expenses.toFixed(2)} revenues:${calculatedType.revenues.toFixed(2)} income:${calculatedType.income.toFixed(2)} detail count:${calculatedType.details.length}` + detailInfo
+      return `expenses: ${calculatedType.expenses.toFixed(2)}, revenues: ${calculatedType.revenues.toFixed(2)}, income: ${calculatedType.income.toFixed(2)}, total weight: 8` + detailInfo
     },
-    GetComparer: (dataA, dataB) => (dataB.vaal.income - dataA.vaal.income)
+    GetComparer: (dataA, dataB) => (dataB.vaal.income - dataA.vaal.income),
+    colSpan: 2,
   } as ListedProperty<CalculatedData>],
   ['LensIncome', {
     GetPropertyValue: (data) => {
@@ -46,7 +52,8 @@ const listedProperty = new Map<string, ListedProperty<CalculatedData>>([
       }
       return `expenses:${calculatedType.expenses.toFixed(2)} revenues:${calculatedType.revenues.toFixed(2)} income:${calculatedType.income.toFixed(2)} detail count:${calculatedType.details.length}` + detailInfo
     },
-    GetComparer: (dataA, dataB) => (dataB.lens.income - dataA.lens.income)
+    GetComparer: (dataA, dataB) => (dataB.lens.income - dataA.lens.income),
+    colSpan: 2,
   } as ListedProperty<CalculatedData>],
 ])
 export interface ZoosewuProps {
